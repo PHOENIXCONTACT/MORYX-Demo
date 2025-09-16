@@ -1,0 +1,32 @@
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB-InfluxQL-MORYX
+    orgId: 1
+    version: 2
+    uid: 15dfgb4651df
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    editable: true
+    jsonData:
+      dbName: moryx
+      httpMode: GET
+      httpHeaderName1: 'Authorization'
+  - name: Postgres
+    type: postgres
+    uid: 78dfgb4657df
+    url: postgres:5432
+    editable: true
+    user: grafana
+    secureJsonData:
+      password: 'grafana'
+    jsonData:
+      database: postgres
+      sslmode: 'disable' # disable/require/verify-ca/verify-full
+      maxOpenConns: 100 # Grafana v5.4+
+      maxIdleConns: 100 # Grafana v5.4+
+      maxIdleConnsAuto: true # Grafana v9.5.1+
+      connMaxLifetime: 14400 # Grafana v5.4+
+      postgresVersion: 1601 # 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10
+      timescaledb: false

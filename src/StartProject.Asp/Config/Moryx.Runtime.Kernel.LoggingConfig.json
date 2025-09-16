@@ -1,0 +1,232 @@
+{
+  "DefaultLevel": "Info",
+  "LoggerConfigs": [
+    {
+      "LoggerName": "Kernel",
+      "ActiveLevel": "Info",
+      "ChildConfigs": []
+    },
+    {
+      "LoggerName": "DbContextManager",
+      "ActiveLevel": "Info",
+      "ChildConfigs": [
+        {
+          "LoggerName": "DbContextManager.NpgsqlModelConfigurator",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        }
+      ]
+    },
+    {
+      "LoggerName": "SetupProvider",
+      "ActiveLevel": "Info",
+      "ChildConfigs": [
+        {
+          "LoggerName": "SetupProvider.ProvideMaterialTrigger",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "SetupProvider.ContainerReservationTrigger",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        }
+      ]
+    },
+    {
+      "LoggerName": "MediaServer",
+      "ActiveLevel": "Info",
+      "ChildConfigs": [
+        {
+          "LoggerName": "MediaServer.ImagePreviewCreator",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        }
+      ]
+    },
+    {
+      "LoggerName": "NotificationPublisher",
+      "ActiveLevel": "Info",
+      "ChildConfigs": []
+    },
+    {
+      "LoggerName": "ProductManager",
+      "ActiveLevel": "Info",
+      "ChildConfigs": []
+    },
+    {
+      "LoggerName": "ResourceManager",
+      "ActiveLevel": "Info",
+      "ChildConfigs": [
+        {
+          "LoggerName": "ResourceManager.ResourceLinker",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.ResourceManager",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.ResourceInteractionOnly",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.ResourceInteractionHost",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Montage-4",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Montage-2",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Montage-6",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Montage-3",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Montage-5",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Lötmaschine-1",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Montage-1",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.MyClient",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Teststation-1",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Lötmaschine-2",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Teststation-2",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Verpackstation",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ResourceManager.Manuelle Lötstation",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        }
+      ]
+    },
+    {
+      "LoggerName": "Maintenance",
+      "ActiveLevel": "Info",
+      "ChildConfigs": []
+    },
+    {
+      "LoggerName": "WorkflowEditing",
+      "ActiveLevel": "Info",
+      "ChildConfigs": []
+    },
+    {
+      "LoggerName": "ProcessEngine",
+      "ActiveLevel": "Info",
+      "ChildConfigs": [
+        {
+          "LoggerName": "ProcessEngine.JobList",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ProcessEngine.ActivityPool",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ProcessEngine.ActivityDispatcher",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ProcessEngine.ActivityProvider",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ProcessEngine.ProcessInterruption",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ProcessEngine.ProcessRemoval",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "ProcessEngine.ResourceAssignment",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        }
+      ]
+    },
+    {
+      "LoggerName": "OrderManagement",
+      "ActiveLevel": "Info",
+      "ChildConfigs": [
+        {
+          "LoggerName": "OrderManagement.Operations",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "OrderManagement.DefaultProductAssignment",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "OrderManagement.DefaultRecipeAssignment",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "OrderManagement.DocumentAssignStep",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        },
+        {
+          "LoggerName": "OrderManagement.OperationManager",
+          "ActiveLevel": "Info",
+          "ChildConfigs": []
+        }
+      ]
+    }
+  ],
+  "ConfigState": "Generated"
+}

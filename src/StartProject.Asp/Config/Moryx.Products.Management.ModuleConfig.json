@@ -1,0 +1,189 @@
+{
+  "MaxImporterWait": 20,
+  "Importers": [
+    {
+      "PluginName": "DefaultImporter"
+    },
+    {
+      "$type": "Moryx.Products.Demo.Importer.DemoProductImporterConfig, Moryx.Products.Demo",
+      "PluginName": "DemoProductImporter"
+    }
+  ],
+  "TypeStrategies": [
+    {
+      "$type": "Moryx.Products.Management.GenericTypeConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericTypeStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [
+        {
+          "PropertyName": "Voltage",
+          "PluginName": "IntegerColumnMapper",
+          "Column": "Integer1"
+        },
+        {
+          "PropertyName": "SolderingPoints",
+          "PluginName": "TextColumnMapper",
+          "Column": "Text1"
+        }
+      ],
+      "TargetType": "Moryx.Demo.Products.CircuitBoardType"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericTypeConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericTypeStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [
+        {
+          "PropertyName": "Weight",
+          "PluginName": "FloatColumnMapper",
+          "Column": "Float1"
+        },
+        {
+          "PropertyName": "Color",
+          "PluginName": "IntegerColumnMapper",
+          "Column": "Integer1"
+        }
+      ],
+      "TargetType": "Moryx.Demo.Products.ControlCabinetType"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericTypeConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericTypeStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [],
+      "TargetType": "Moryx.Demo.Products.ElectronicDeviceType"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericTypeConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericTypeStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [
+        {
+          "PropertyName": "Color",
+          "PluginName": "IntegerColumnMapper",
+          "Column": "Integer1"
+        }
+      ],
+      "TargetType": "Moryx.Demo.Products.HousingType"
+    }
+  ],
+  "InstanceStrategies": [
+    {
+      "$type": "Moryx.Products.Management.GenericInstanceConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericInstanceStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [
+        {
+          "PropertyName": "Identity",
+          "PluginName": "TextColumnMapper",
+          "Column": "Text1"
+        }
+      ],
+      "TargetType": "Moryx.Demo.Products.CircuitBoardInstance"
+    },
+    {
+      "TargetType": "Moryx.Demo.Products.ElectronicDeviceInstance",
+      "PluginName": "SkipInstancesStrategy"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericInstanceConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericInstanceStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [
+        {
+          "PropertyName": "Identity",
+          "PluginName": "TextColumnMapper",
+          "Column": "Text1"
+        }
+      ],
+      "TargetType": "Moryx.Demo.Products.HousingInstance"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericInstanceConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericInstanceStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [
+        {
+          "PropertyName": "Identity",
+          "PluginName": "TextColumnMapper",
+          "Column": "Text1"
+        }
+      ],
+      "TargetType": "Moryx.Demo.Products.ControlCabinetInstance"
+    }
+  ],
+  "LinkStrategies": [
+    {
+      "$type": "Moryx.Products.Management.GenericLinkConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericLinkStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [],
+      "TargetType": "Moryx.Demo.Products.ControlCabinetType",
+      "PartName": "Parts",
+      "PartCreation": "FromPartLink"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericLinkConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericLinkStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [],
+      "TargetType": "Moryx.Demo.Products.ElectronicDeviceType",
+      "PartName": "Housing",
+      "PartCreation": "FromPartLink"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericLinkConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericLinkStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [],
+      "TargetType": "Moryx.Demo.Products.ElectronicDeviceType",
+      "PartName": "CircuitBoard",
+      "PartCreation": "FromPartLink"
+    }
+  ],
+  "RecipeStrategies": [
+    {
+      "$type": "Moryx.Products.Management.GenericRecipeConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericRecipeStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [],
+      "TargetType": "Moryx.AbstractionLayer.Recipes.ProductionRecipe"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericRecipeConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericRecipeStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [
+        {
+          "PropertyName": "Amount",
+          "PluginName": "IntegerColumnMapper",
+          "Column": "Integer1"
+        },
+        {
+          "PropertyName": "OrderNumber",
+          "PluginName": "TextColumnMapper",
+          "Column": "Text1"
+        },
+        {
+          "PropertyName": "OperationNumber",
+          "PluginName": "TextColumnMapper",
+          "Column": "Text2"
+        },
+        {
+          "PropertyName": "TestTime",
+          "PluginName": "IntegerColumnMapper",
+          "Column": "Integer2"
+        }
+      ],
+      "TargetType": "Moryx.Demo.Recipes.DemoRecipe"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericRecipeConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericRecipeStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [],
+      "TargetType": "Moryx.AbstractionLayer.Recipes.ProductRecipe"
+    }
+  ],
+  "ConfigState": "Generated"
+}

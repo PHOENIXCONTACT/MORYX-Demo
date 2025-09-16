@@ -1,0 +1,22 @@
+{
+  "Plugins": [
+    {
+      "$type": "Moryx.Runtime.Maintenance.Plugins.Modules.ModuleMaintenanceConfig, Moryx.Runtime.Maintenance"
+    },
+    {
+      "$type": "Moryx.Runtime.Maintenance.Plugins.Logging.LoggingMaintenanceConfig, Moryx.Runtime.Maintenance",
+      "AppenderTimeOut": 30000
+    },
+    {
+      "$type": "Moryx.Runtime.Maintenance.Plugins.Common.CommonMaintenanceConfig, Moryx.Runtime.Maintenance"
+    },
+    {
+      "$type": "Moryx.Runtime.Maintenance.Plugins.Databases.DatabaseConfig, Moryx.Runtime.Maintenance",
+      "SetupDataDir": ".\\Backups\\"
+    },
+    {
+      "$type": "Moryx.Runtime.Maintenance.Web.MaintenanceWebConfig, Moryx.Runtime.Maintenance.Web"
+    }
+  ],
+  "ConfigState": "Generated"
+}

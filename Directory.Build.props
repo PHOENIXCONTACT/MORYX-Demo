@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/PHOENIXCONTACT/Moryx-Demo</RepositoryUrl>   
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <DebugType>embedded</DebugType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>  
+  <PropertyGroup>
+    <!-- Mark unspecified versions for nuget packages as errors -->
+    <WarningsAsErrors>$(WarningsAsErrors);NU1605;NU1604</WarningsAsErrors>
+  </PropertyGroup> 
+  <PropertyGroup>
+    <MoryxVersion>10.0.0-future.*</MoryxVersion>
+  </PropertyGroup>
+</Project>

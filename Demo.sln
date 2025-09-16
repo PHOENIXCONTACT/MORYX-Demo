@@ -1,0 +1,68 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moryx.Demo", "src\Moryx.Demo\Moryx.Demo.csproj", "{DF4730D4-5DB2-46A5-9F2B-C7B22E61268B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moryx.Resources.Demo", "src\Moryx.Resources.Demo\Moryx.Resources.Demo.csproj", "{DCE3B1A1-75B0-42EB-AFEA-531F23825EE5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moryx.Products.Demo", "src\Moryx.Products.Demo\Moryx.Products.Demo.csproj", "{C73CFA3D-BE4F-4ABB-92FE-8AC05D23D0D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moryx.Orders.Demo", "src\Moryx.Orders.Demo\Moryx.Orders.Demo.csproj", "{2812A70A-ED6A-42CD-8522-2217ADEAA89C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moryx.ControlSystem.Demo", "src\Moryx.ControlSystem.Demo\Moryx.ControlSystem.Demo.csproj", "{ECF74FE7-7F73-4FC0-8E5E-607A24020B07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B036179B-03F1-4A6A-80CD-83694061D5E5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		.gitlab-ci.yml = .gitlab-ci.yml
+		Build.ps1 = Build.ps1
+		compose.yml = compose.yml
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		NuGet.Config = NuGet.Config
+		README.md = README.md
+		version.json = version.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartProject.Asp", "src\StartProject.Asp\StartProject.Asp.csproj", "{9CF60035-A6C9-4077-A6DA-14E179E348F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF4730D4-5DB2-46A5-9F2B-C7B22E61268B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF4730D4-5DB2-46A5-9F2B-C7B22E61268B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF4730D4-5DB2-46A5-9F2B-C7B22E61268B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF4730D4-5DB2-46A5-9F2B-C7B22E61268B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCE3B1A1-75B0-42EB-AFEA-531F23825EE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCE3B1A1-75B0-42EB-AFEA-531F23825EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCE3B1A1-75B0-42EB-AFEA-531F23825EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCE3B1A1-75B0-42EB-AFEA-531F23825EE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C73CFA3D-BE4F-4ABB-92FE-8AC05D23D0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73CFA3D-BE4F-4ABB-92FE-8AC05D23D0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73CFA3D-BE4F-4ABB-92FE-8AC05D23D0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73CFA3D-BE4F-4ABB-92FE-8AC05D23D0D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2812A70A-ED6A-42CD-8522-2217ADEAA89C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2812A70A-ED6A-42CD-8522-2217ADEAA89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2812A70A-ED6A-42CD-8522-2217ADEAA89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2812A70A-ED6A-42CD-8522-2217ADEAA89C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF74FE7-7F73-4FC0-8E5E-607A24020B07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF74FE7-7F73-4FC0-8E5E-607A24020B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF74FE7-7F73-4FC0-8E5E-607A24020B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF74FE7-7F73-4FC0-8E5E-607A24020B07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF60035-A6C9-4077-A6DA-14E179E348F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF60035-A6C9-4077-A6DA-14E179E348F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF60035-A6C9-4077-A6DA-14E179E348F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF60035-A6C9-4077-A6DA-14E179E348F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A74EE28-4BA6-4A6D-81BC-1D8866F13620}
+	EndGlobalSection
+EndGlobal

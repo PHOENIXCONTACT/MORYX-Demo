@@ -1,0 +1,50 @@
+name: 'Daily'
+
+on:
+  schedule:
+    # Workflow runs every day at 4:23am
+    - cron:  '23 4 * * *'
+  
+env:
+  dotnet_sdk_version: '8.0.404'
+
+jobs:
+  Build-MORYX-Demo:
+    runs-on: ubuntu-latest
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        id: cache-nuget
+        with:
+          path:  ${{ github.workspace }}/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: 🔧 Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.dotnet_sdk_version }}
+
+      - name: 🔧 Setup nuget
+        uses: nuget/setup-nuget@v1
+
+      - name: ♺ Execute nuget restore
+        run: nuget restore
+        if: steps.cache-nuget.outputs.cache-hit != 'true'
+
+      - name: 🔨 Execute dotnet publish
+        run: |
+          dotnet publish -c Release -o ./publish
+        shell: pwsh
+ 
+      - name: ⬆️ Upload publish artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-moryx-demo
+          path: ./publish/
+          retention-days: 1
+          if-no-files-found: error

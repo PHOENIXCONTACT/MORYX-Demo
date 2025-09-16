@@ -1,0 +1,87 @@
+{
+  "ProcessBindings": [
+    {
+      "Name": "productIdent",
+      "Binding": "Product.Identifier",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "productRev",
+      "Binding": "Product.Identity.Revision",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "order",
+      "Binding": "Recipe.OrderNumber",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "operation",
+      "Binding": "Recipe.OperationNumber",
+      "ValueTarget": "Tag"
+    }
+  ],
+  "ActivityBindings": [
+    {
+      "Name": "errorCode",
+      "Binding": "Tracing.ErrorCode",
+      "ValueTarget": "Field"
+    },
+    {
+      "Name": "productIdent",
+      "Binding": "Product.Identifier",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "productRev",
+      "Binding": "Product.Identity.Revision",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "order",
+      "Binding": "Recipe.OrderNumber",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "operation",
+      "Binding": "Recipe.OperationNumber",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "solderingTemp",
+      "Binding": "Tracing.Temperature",
+      "ValueTarget": "Field"
+    },
+    {
+      "Name": "resource",
+      "Binding": "Resource.Name",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "energy",
+      "Binding": "Resource.NominalPower",
+      "ValueTarget": "Field"
+    },
+    {
+      "Name": "faultyContact",
+      "Binding": "Tracing.Contact",
+      "ValueTarget": "Field"
+    },
+    {
+      "Name": "resistance",
+      "Binding": "Tracing.Resistance",
+      "ValueTarget": "Field"
+    },
+    {
+      "Name": "FactoryName",
+      "Binding": "Resource.Parent.Parent.Parent.Name",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "serial",
+      "Binding": "Process.Id",
+      "ValueTarget": "Tag"
+    }
+  ],
+  "ConfigState": "Generated"
+}

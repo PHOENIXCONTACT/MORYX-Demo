@@ -1,0 +1,14 @@
+variables:
+  PROJECT_NAME: $CI_PROJECT_NAME
+  PackageTags: 'moryx $CI_PROJECT_NAME'
+  # prefilled maintainer because this email has the highest number of commits (114)
+  # honorable mentions: mvielhaus@phoenixcontact.com (91 commits), wjatscheslaw.sujev@phoenixcontact.com (81 commits), matho.camara@gmail.com (48 commits)
+  MAINTAINER: 'tfuchs@phoenixcontact.com' 
+  PROJECT_TYPE: 'exe'
+  REGISTRY_NAMESPACE: 'moryx'
+  linux_image:  $CI_REGISTRY/msy/dotnet-sdk-node:8.0.401
+
+include:
+  - project: 'ms/moryx/cicd-templates'
+    file: 'templates/dockerBuild.yml'
+    ref: develop

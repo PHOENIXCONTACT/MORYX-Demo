@@ -1,0 +1,25 @@
+{
+  "JobSchedulerConfig": {
+    "$type": "Moryx.ControlSystem.ProcessEngine.Jobs.ParallelSchedulerConfig, Moryx.ControlSystem.ProcessEngine",
+    "MaxActiveJobs": 4
+  },
+  "ResourceSelectors": [
+    {
+      "PluginName": "SolderingOptimizer",
+      "SortOrder": 0
+    },
+    {
+      "PluginName": "LoadBalancer",
+      "SortOrder": 1
+    }
+  ],
+  "RemovalMessage": "Remove broken process from carrier!",
+  "UnassignedActivitySeverity": "Error",
+  "ActivityTimeoutSeverity": "Warning",
+  "TimeoutCalculation": "OneSigma",
+  "SampleSize": 1000,
+  "ManualShutdownTimeoutSec": 30,
+  "BootSyncTimeoutSec": 5,
+  "RebootCompleteInitial": false,
+  "ConfigState": "Generated"
+}

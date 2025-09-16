@@ -1,0 +1,63 @@
+{
+  "Listeners": [
+    {
+      "$type": "Moryx.ProcessData.InfluxDbListener.InfluxDbListenerConfig, Moryx.ProcessData.InfluxDbListener",
+      "PluginName": "InfluxDbListener",
+      "Host": "localhost",
+      "Port": 8086,
+      "Username": null,
+      "Password": null,
+      "DatabaseName": "moryx",
+      "ReportIntervalMs": 500,
+      "ListenerName": "Time Series Database",
+      "MeasurandConfigs": [
+        {
+          "Name": "controlSystem_activities",
+          "IsEnabled": true
+        },
+        {
+          "Name": "controlSystem_processes",
+          "IsEnabled": true
+        },
+        {
+          "Name": "cell_report",
+          "IsEnabled": true
+        },
+        {
+          "Name": "notifications_acknowledged",
+          "IsEnabled": true
+        }
+      ]
+    },
+    {
+      "$type": "Moryx.ProcessData.InfluxDbListener.InfluxDbListenerConfig, Moryx.ProcessData.InfluxDbListener",
+      "PluginName": "InfluxDbListener",
+      "Host": "localhost",
+      "Port": 0,
+      "Username": null,
+      "Password": null,
+      "DatabaseName": null,
+      "ReportIntervalMs": 10000,
+      "ListenerName": "Enterprise Cloud Analytics",
+      "MeasurandConfigs": [
+        {
+          "Name": "controlSystem_activities",
+          "IsEnabled": false
+        },
+        {
+          "Name": "controlSystem_processes",
+          "IsEnabled": false
+        },
+        {
+          "Name": "cell_report",
+          "IsEnabled": false
+        },
+        {
+          "Name": "notifications_acknowledged",
+          "IsEnabled": false
+        }
+      ]
+    }
+  ],
+  "ConfigState": "Valid"
+}

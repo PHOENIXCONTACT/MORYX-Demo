@@ -1,0 +1,52 @@
+{
+  "MaxModuleDependencies": 0,
+  "MaxModuleDependends": 0,
+  "ManagedModules": [
+    {
+      "ModuleName": "SetupProvider",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    },
+    {
+      "ModuleName": "ProcessEngine",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    },
+    {
+      "ModuleName": "OrderManagement",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    },
+    {
+      "ModuleName": "MediaServer",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    },
+    {
+      "ModuleName": "NotificationPublisher",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    },
+    {
+      "ModuleName": "ProductManager",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    },
+    {
+      "ModuleName": "ResourceManager",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    },
+    {
+      "ModuleName": "Maintenance",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    },
+    {
+      "ModuleName": "WorkflowEditing",
+      "StartBehaviour": "Auto",
+      "FailureBehaviour": "Stop"
+    }
+  ],
+  "ConfigState": "Generated"
+}

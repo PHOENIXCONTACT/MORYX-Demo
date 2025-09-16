@@ -1,0 +1,22 @@
+{
+  "StoragePath": "Backups\\MediaServer",
+  "MaxFileSizeInMb": 10,
+  "SupportedFileTypes": [
+    ".png",
+    ".jpeg",
+    ".jpg",
+    ".gif",
+    ".pdf",
+    ".txt",
+    ".csv",
+    ".webp"
+  ],
+  "PreviewCreators": [
+    {
+      "$type": "Moryx.Media.Server.Previews.ImagePreviewCreatorConfig, Moryx.Media.Server",
+      "LongestEdge": 250,
+      "Quality": 80
+    }
+  ],
+  "ConfigState": "Generated"
+}

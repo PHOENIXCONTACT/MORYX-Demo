@@ -1,0 +1,19 @@
+{
+  "SetupTriggers": [
+    {
+      "$type": "Moryx.ControlSystem.Demo.SetupTriggers.ProvideMaterialConfig, Moryx.ControlSystem.Demo",
+      "PluginName": "ProvideMaterialTrigger",
+      "Property": "Housing",
+      "SortOrder": 0,
+      "Disabled": false
+    },
+    {
+      "$type": "Moryx.ControlSystem.Demo.SetupTriggers.ProvideMaterialConfig, Moryx.ControlSystem.Demo",
+      "PluginName": "ProvideMaterialTrigger",
+      "Property": "CircuitBoard",
+      "SortOrder": 2,
+      "Disabled": false
+    }
+  ],
+  "ConfigState": "Generated"
+}

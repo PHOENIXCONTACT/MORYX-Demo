@@ -1,0 +1,25 @@
+{
+  "NotificationBindings": [
+    {
+      "Name": "source",
+      "Binding": "Notification.Source",
+      "ValueTarget": "Field"
+    },
+    {
+      "Name": "created",
+      "Binding": "Notification.Created",
+      "ValueTarget": "Field"
+    },
+    {
+      "Name": "title",
+      "Binding": "Notification.Title",
+      "ValueTarget": "Tag"
+    },
+    {
+      "Name": "message",
+      "Binding": "Notification.Message",
+      "ValueTarget": "Field"
+    }
+  ],
+  "ConfigState": "Generated"
+}
