@@ -1,12 +1,12 @@
 // Copyright (c) 2025, Phoenix Contact GmbH & Co. KG
 // Licensed under the Apache License, Version 2.0
 
-using Moryx.AbstractionLayer.Products;
 using Moryx.Demo.Properties;
-using Moryx.Serialization;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using Moryx.AbstractionLayer.Products;
+using Moryx.Serialization;
 
 namespace Moryx.Demo.Products;
 

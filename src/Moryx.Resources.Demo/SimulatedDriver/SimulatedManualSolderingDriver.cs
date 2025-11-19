@@ -1,14 +1,13 @@
 // Copyright (c) 2025, Phoenix Contact GmbH & Co. KG
 // Licensed under the Apache License, Version 2.0
 
-using Moryx.AbstractionLayer;
+using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.ControlSystem.Cells;
+using Moryx.ControlSystem.Simulation;
 using Moryx.Resources.Demo.Messages;
-using Moryx.Simulation;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Moryx.Resources.Demo.SimulatedDriver
 {

@@ -9,9 +9,9 @@ namespace Moryx.ControlSystem.Demo.SetupTriggers;
 
 internal static class TriggerHelpers
 {
-    internal static IProductType ExtractMaterial(ElectronicDeviceType product, string property)
+    internal static ProductType ExtractMaterial(ElectronicDeviceType product, string property)
     {
-        IProductType material;
+        ProductType material;
         switch (property)
         {
 

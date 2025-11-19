@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Moryx.AbstractionLayer;
+using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Capabilities;
 using Moryx.AbstractionLayer.Products;
 using Moryx.AbstractionLayer.Resources;
@@ -50,7 +50,7 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
     [EntrySerialize, Display(ResourceType = typeof(Strings), Name = nameof(Strings.INSTANCE_COUNT))]
     public int InstanceCount { get; set; }
 
-    public IProductType ProvidedMaterial { get; set; }
+    public ProductType ProvidedMaterial { get; set; }
 
     [DataMember, EntrySerialize, Display(ResourceType = typeof(Strings), Name = nameof(Strings.MANUAL_MODE))]
     [EntryVisualization("", "sign_language")]
@@ -177,7 +177,7 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
         PublishActivityCompleted(mcresult);
     }
 
-    public void SetMaterial(IProductType material)
+    public void SetMaterial(ProductType material)
     {
         MaterialIdentifier = material?.Identity.Identifier;
         ProvidedMaterial = material;
