@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Moryx.AbstractionLayer;
+using Moryx.AbstractionLayer.Activities;
 
 namespace Moryx.Demo.Activities;
 

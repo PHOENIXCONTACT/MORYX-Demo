@@ -5,7 +5,6 @@
   <ItemGroup>
     <PackageReference Include="Moryx.AbstractionLayer" />
     <PackageReference Include="Moryx.ControlSystem" />
-    <PackageReference Include="Moryx.Simulation" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Strings.Designer.cs">

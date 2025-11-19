@@ -3,7 +3,8 @@
 
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using Moryx.AbstractionLayer;
+using Moryx.AbstractionLayer.Activities;
+using Moryx.AbstractionLayer.Processes;
 using Moryx.AbstractionLayer.Products;
 using Moryx.AbstractionLayer.Recipes;
 using Moryx.ControlSystem.VisualInstructions;
@@ -25,7 +26,7 @@ public class AssemblyParameters : VisualInstructionParameters, IConsultantValues
     [EntrySerialize, DataMember]
     public int ExecutionTimeSec { get; set; }
 
-    public IProductType Material { get; set; }
+    public ProductType Material { get; set; }
 
     protected override void Populate(IProcess process, Parameters instance)
     {

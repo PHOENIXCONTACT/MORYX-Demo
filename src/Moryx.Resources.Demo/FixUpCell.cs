@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
-using Moryx.AbstractionLayer;
+using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Capabilities;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.ControlSystem.Activities;

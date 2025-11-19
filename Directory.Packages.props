@@ -83,9 +83,8 @@
     <PackageVersion Include="Moryx.Launcher" Version="$(MoryxVersion)" />
     
     <!-- MORYX Simulation -->
-    <PackageVersion Include="Moryx.Simulation" Version="$(MoryxVersion)" />
     <PackageVersion Include="Moryx.Drivers.Simulation" Version="$(MoryxVersion)" />
-    <PackageVersion Include="Moryx.Simulation.Simulator" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.ControlSystem.Simulator" Version="$(MoryxVersion)" />
     
     <!-- MORYX Factory Monitor-->
     <PackageVersion Include="Moryx.FactoryMonitor.Endpoints" Version="$(MoryxVersion)" />

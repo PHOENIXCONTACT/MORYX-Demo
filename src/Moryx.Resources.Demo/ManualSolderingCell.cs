@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Moryx.AbstractionLayer;
 using Moryx.AbstractionLayer.Capabilities;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.ControlSystem.Activities;
@@ -23,6 +22,8 @@ using Moryx.Serialization;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using Moryx.AbstractionLayer.Activities;
+using Moryx.AbstractionLayer.Processes;
 
 namespace Moryx.Resources.Demo;
 

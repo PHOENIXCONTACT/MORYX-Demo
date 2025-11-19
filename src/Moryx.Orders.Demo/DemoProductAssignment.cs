@@ -16,7 +16,7 @@ namespace Moryx.Orders.Demo;
 public class DemoProductAssignment : ProductAssignmentBase<ProductAssignmentConfig>
 {
     /// <inheritdoc />
-    public override Task<IProductType> SelectProduct(Operation operation, IOperationLogger operationLogger)
+    public override Task<ProductType> SelectProduct(Operation operation, IOperationLogger operationLogger)
     {
         var productIdentity = (ProductIdentity)operation.Product.Identity;
         var selectedType = ProductManagement.LoadType(productIdentity);

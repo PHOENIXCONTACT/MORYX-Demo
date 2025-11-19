@@ -12,7 +12,7 @@ public class AssemblyCapabilities : CapabilitiesBase
 {
     public IReadOnlyList<string> Reservations { get; set; }
 
-    public IProductType EquippedMaterial { get; set; }
+    public ProductType EquippedMaterial { get; set; }
 
     protected override bool ProvidedBy(ICapabilities provided)
     {

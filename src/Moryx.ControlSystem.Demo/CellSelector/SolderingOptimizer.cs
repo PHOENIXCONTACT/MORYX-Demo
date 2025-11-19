@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Moryx.AbstractionLayer;
+using Moryx.AbstractionLayer.Activities;
 using Moryx.Container;
 using Moryx.ControlSystem.Cells;
 using Moryx.ControlSystem.Processes;

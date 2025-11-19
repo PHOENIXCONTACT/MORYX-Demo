@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Moryx.AbstractionLayer;
+using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.ControlSystem.Activities;
 using Moryx.ControlSystem.Cells;
