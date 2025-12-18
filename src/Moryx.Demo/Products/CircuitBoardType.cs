@@ -32,7 +32,7 @@ public class SolderingPoints
 
     public int PosY { get; set; }
 
-    [PrimitiveValues(0.75, 1.5, 2.5), Display(ResourceType = typeof(Strings), Name = nameof(Strings.DIAMETER))]
+    [AllowedValuesAttribute(0.75, 1.5, 2.5), Display(ResourceType = typeof(Strings), Name = nameof(Strings.DIAMETER))]
     public double Diameter { get; set; }
 
     public override string ToString()

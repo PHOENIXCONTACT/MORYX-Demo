@@ -10,6 +10,7 @@ using Moryx.AbstractionLayer.Recipes;
 using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Demo.Products;
 using Moryx.Serialization;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Demo.Activities;
 
@@ -29,7 +30,7 @@ public class SolderingParameters : VisualInstructionParameters, IConsultantValue
     public VisualInstruction[] FaultyContactInstructions { get; set; }
 
 
-    protected override void Populate(IProcess process, Parameters instance)
+    protected override void Populate(Process process, Parameters instance)
     {
         base.Populate(process, instance);
 

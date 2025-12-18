@@ -1,6 +1,7 @@
 // Copyright (c) 2025, Phoenix Contact GmbH & Co. KG
 // Licensed under the Apache License, Version 2.0
 
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moryx.AbstractionLayer.Products;
@@ -16,10 +17,10 @@ namespace Moryx.Orders.Demo;
 public class DemoProductAssignment : ProductAssignmentBase<ProductAssignmentConfig>
 {
     /// <inheritdoc />
-    public override Task<ProductType> SelectProduct(Operation operation, IOperationLogger operationLogger)
+    public Task<ProductType> SelectProduct(Operation operation, IOperationLogger operationLogger)
     {
         var productIdentity = (ProductIdentity)operation.Product.Identity;
-        var selectedType = ProductManagement.LoadType(productIdentity);
+        var selectedType = ProductManagement.LoadTypeAsync(productIdentity);
 
         if (selectedType == null)
         {
@@ -27,6 +28,11 @@ public class DemoProductAssignment : ProductAssignmentBase<ProductAssignmentConf
             return null;
         }
 
-        return Task.FromResult(selectedType);
+        return selectedType;
+    }
+
+    public override Task<ProductType> SelectProductAsync(Operation operation, IOperationLogger operationLogger, CancellationToken cancellationToken)
+    {
+        throw new System.NotImplementedException();
     }
 }

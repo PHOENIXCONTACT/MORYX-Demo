@@ -15,7 +15,7 @@ public class MaterialReservationParameters : Parameters
 
     public ProductType Material { get; set; }
 
-    protected override void Populate(IProcess process, Parameters instance)
+    protected override void Populate(Process process, Parameters instance)
     {
         var parameters = (MaterialReservationParameters)instance;
         parameters.Reserve = Reserve;

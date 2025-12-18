@@ -24,6 +24,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Processes;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Resources.Demo;
 
@@ -31,6 +32,32 @@ namespace Moryx.Resources.Demo;
 public class ManualSolderingCell : DemoCellBase, IProcessReporter
 {
     private readonly Dictionary<Guid, long> _currentSessionInstructionMappings = [];
+
+    event EventHandler<Process> IProcessReporter.ProcessBroken
+    {
+        add
+        {
+            throw new NotImplementedException();
+        }
+
+        remove
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    event EventHandler<Process> IProcessReporter.ProcessRemoved
+    {
+        add
+        {
+            throw new NotImplementedException();
+        }
+
+        remove
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     #region Constructors
 
@@ -80,9 +107,9 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
 
     #region Lifecycle
 
-    protected override void OnInitialize()
+    protected async Task OnInitializeAsync()
     {
-        base.OnInitialize();
+        await OnInitializeAsync();
         UpdateCapabilities();
         Driver.Received += OnMessageReceived;
     }
@@ -111,7 +138,7 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
         }
     }
 
-    public override IEnumerable<Session> ControlSystemAttached()
+    public override IEnumerable<Session> GetControlSystemAttached()
     {
         lock (_workspaceLock)
         {
@@ -174,12 +201,12 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
         }
     }
 
-    public override void ProcessAborting(IActivity affectedActivity)
+    public override void ProcessAborting(Activity affectedActivity)
     {
         var position = Workspace.GetPositionByActivityId(affectedActivity.Id);
         if (position is null)
         {
-            PublishActivityCompleted(Session.WrapUnknownActivity(affectedActivity));
+            PublishActivityCompleted(Session.WrapUnknownActivity((Activity)affectedActivity));
             return;
         }
 
@@ -234,6 +261,16 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
             processes = [.. Workspace.Positions.Where(p => !p.IsEmpty()).Select(p => p.Process)];
         }
         Parallel.ForEach(processes, invocation);
+    }
+
+    protected override IEnumerable<Session> ProcessEngineAttached()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override IEnumerable<Session> ProcessEngineDetached()
+    {
+        throw new NotImplementedException();
     }
 
     public event EventHandler<IProcess> ProcessBroken;

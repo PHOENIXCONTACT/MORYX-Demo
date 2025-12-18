@@ -21,7 +21,7 @@ public class TestParameters : Parameters, IConsultantValues
     [EntrySerialize(EntrySerializeMode.Never)]
     public int Voltage { get; set; }
 
-    protected override void Populate(IProcess process, Parameters instance)
+    protected override void Populate(Process process, Parameters instance)
     {
         var demoRecipe = (DemoRecipe)process.Recipe;
         var product = (ElectronicDeviceType)demoRecipe.Product;

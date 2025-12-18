@@ -12,12 +12,13 @@ using Moryx.StateMachines;
 using Moryx.Threading;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Moryx.Resources.Demo.SimulatedDriver;
 
 [ResourceRegistration, ResourceAvailableAs(typeof(IProcessDataPublisher))]
-public abstract class DemoSimulatedDriverBase : Driver, IMessageDriver<object>, ISimulationDriver
+public abstract class DemoSimulatedDriverBase : Driver, IMessageDriver, ISimulationDriver
 {
     public event EventHandler<SimulationState> SimulatedStateChanged;
 
@@ -27,9 +28,9 @@ public abstract class DemoSimulatedDriverBase : Driver, IMessageDriver<object>, 
 
     public abstract void Send(object payload);
 
-    protected override void OnStart()
+    protected async Task OnStartAsync()
     {
-        base.OnStart();
+        await OnStartAsync();
 
         SimulatedState = SimulationState.Idle;
     }
@@ -57,15 +58,25 @@ public abstract class DemoSimulatedDriverBase : Driver, IMessageDriver<object>, 
         return Task.CompletedTask;
     }
 
-    public abstract void Ready(IActivity activity);
+    public abstract void Ready(Activity activity);
     public abstract void Ready(long processId);
     public abstract void Result(SimulationResult result);
-    public IMessageChannel<TChannel> Channel<TChannel>(string identifier)
+    public IMessageChannel Channel<TChannel>(string identifier)
     {
         throw new NotImplementedException();
     }
 
-    public IMessageChannel<TSend, TReceive> Channel<TSend, TReceive>(string identifier)
+    public IMessageChannel Channel<TSend, TReceive>(string identifier)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IMessageChannel Channel(string identifier)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task SendAsync(object payload, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
@@ -73,7 +84,7 @@ public abstract class DemoSimulatedDriverBase : Driver, IMessageDriver<object>, 
     public abstract event EventHandler<object> Received;
 }
 
-public class SimulatedDriverState : DriverState<DemoSimulatedDriverBase>
+public class SimulatedDriverState : SyncDriverState<DemoSimulatedDriverBase>
 {
     [StateDefinition(typeof(SimulatedDriverState), IsInitial = true)]
     public int InitialState = 0;

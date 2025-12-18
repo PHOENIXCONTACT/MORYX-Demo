@@ -9,6 +9,7 @@ using Moryx.Demo.Activities;
 using Moryx.Demo.Capabilities;
 using Moryx.Demo.Products;
 using Moryx.Modules;
+using Moryx.VisualInstructions;
 using Moryx.Workplans;
 using System.Collections.Generic;
 

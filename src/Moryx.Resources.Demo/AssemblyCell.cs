@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Capabilities;
 using Moryx.AbstractionLayer.Products;
@@ -22,6 +23,7 @@ using Moryx.Factory;
 using Moryx.Notifications;
 using Moryx.Resources.Demo.Messages;
 using Moryx.Serialization;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Resources.Demo;
 
@@ -63,14 +65,14 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
     public event EventHandler MaterialChanged;
     public event EventHandler FillingLevelChanged;
 
-    protected override void OnInitialize()
+    protected async Task OnInitializeAsync()
     {
         if (!string.IsNullOrEmpty(MaterialIdentifier))
         {
             ProvidedMaterial = new ProductReference(new ProductIdentity(MaterialIdentifier, ProductIdentity.LatestRevision));
         }
 
-        base.OnInitialize();
+        await OnInitializeAsync();
         UpdateCapabilities();
         Driver.Received += OnMessageReceived;
     }
@@ -82,7 +84,7 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
         base.OnDispose();
     }
 
-    public override IEnumerable<Session> ControlSystemAttached()
+    public override IEnumerable<Session> GetControlSystemAttached()
     {
         yield return Session.StartSession(ActivityClassification.Setup, ReadyToWorkType.Push);
     }
@@ -150,7 +152,7 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
         }
     }
 
-    public override void ProcessAborting(IActivity affectedActivity)
+    public override void ProcessAborting(Activity affectedActivity)
     {
         Instructor.Clear(_instructionId);
         _instructionId = 0;
@@ -226,5 +228,15 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
         {
             base.SequenceCompleted(completed);
         }
+    }
+
+    protected override IEnumerable<Session> ProcessEngineAttached()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override IEnumerable<Session> ProcessEngineDetached()
+    {
+        throw new NotImplementedException();
     }
 }

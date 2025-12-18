@@ -3,13 +3,15 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Moryx.AbstractionLayer.Resources;
+using System.Threading;
+using System.Threading.Tasks;
 using Moryx.Container;
 using Moryx.ControlSystem.Processes;
 using Moryx.Factory;
-using Moryx.Resources.AssemblyInstruction;
 using Moryx.Resources.Demo;
 using Moryx.Resources.Demo.SimulatedDriver;
+using Moryx.AbstractionLayer.Resources;
+using Moryx.Resources.VisualInstructions;
 
 namespace StartProject.Asp;
 
@@ -21,7 +23,7 @@ public class DemoInitializer : ResourceInitializerBase
 
     public override string Description => "Setup the simulation resources for the MORYX Demo";
 
-    public override IReadOnlyList<Resource> Execute(IResourceGraph graph)
+    public IReadOnlyList<Resource> Execute(IResourceGraph graph)
     {
         // Visual instructions
         var instructor = graph.Instantiate<VisualInstructor>();
@@ -239,5 +241,10 @@ public class DemoInitializer : ResourceInitializerBase
         factory.Children.Add(buildingBLoc);
 
         return [factory];
+    }
+
+    public override Task<ResourceInitializerResult> ExecuteAsync(IResourceGraph graph, object parameters, CancellationToken cancellationToken)
+    {
+        throw new System.NotImplementedException();
     }
 }

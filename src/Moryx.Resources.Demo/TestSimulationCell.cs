@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.ControlSystem.Activities;
@@ -52,9 +53,9 @@ public class TestSimulationCell : DemoCellBase, INotificationSender
         Capabilities = new TestCapabilities { Voltage = Voltage };
     }
 
-    protected override void OnInitialize()
+    protected async Task OnInitialize()
     {
-        base.OnInitialize();
+        await OnInitializeAsync();
         UpdateCapabilities();
 
         Driver.Received += OnMessageReceived;
@@ -158,6 +159,16 @@ public class TestSimulationCell : DemoCellBase, INotificationSender
 
         var output = activityStart.CreateResult((int)result);
         PublishActivityCompleted(output);
+    }
+
+    protected override IEnumerable<Session> ProcessEngineAttached()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override IEnumerable<Session> ProcessEngineDetached()
+    {
+        throw new NotImplementedException();
     }
     #endregion
 }

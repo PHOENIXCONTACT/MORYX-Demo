@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0
 
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Products;
 using Moryx.AbstractionLayer.Recipes;
@@ -14,6 +15,7 @@ using Moryx.Demo.Recipes;
 using Moryx.Logging;
 using Moryx.Modules;
 using Moryx.Products.Management;
+using Moryx.VisualInstructions;
 using Moryx.Workplans;
 
 namespace Moryx.Products.Demo.Importer;
@@ -40,7 +42,7 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
     public IWorkplans WorkplanStorage { get; set; }
     #endregion
 
-    protected override Task<ProductImporterResult> Import(ProductImportContext context, DemoImportParameters parameters)
+    protected Task<ProductImporterResult> Import(ProductImportContext context, DemoImportParameters parameters)
     {
         var circuitBoardProduct = CreateCircuitBoard("1313131", 0, "Product-1 BOARD");
         var housingProduct = CreateHousing("0101010", 1, "Product-1 HOUSING GY", PlasticColor.Grau);
@@ -52,12 +54,12 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
         var workplan = CreateTtcWorkplan(parameters);
         var recipe = CreateRecipe(electronicDeviceProduct, workplan);
 
-        Storage.SaveType(circuitBoardProduct);
-        Storage.SaveType(housingProduct);
-        Storage.SaveType(electronicDeviceProduct);
-        Storage.SaveType(controlCabinetProduct);
-        WorkplanStorage.SaveWorkplan(workplan);
-        Storage.SaveRecipe(recipe);
+        Storage.SaveTypeAsync(circuitBoardProduct);
+        Storage.SaveTypeAsync(housingProduct);
+        Storage.SaveTypeAsync(electronicDeviceProduct);
+        Storage.SaveTypeAsync(controlCabinetProduct);
+        WorkplanStorage.SaveWorkplanAsync(workplan);
+        Storage.SaveRecipeAsync(recipe);
 
         circuitBoardProduct = CreateCircuitBoard("1414141", 4, "Product-2 BOARD");
         housingProduct = CreateHousing("0202020", 5, "Product-2 HOUSING BK", PlasticColor.Schwarz);
@@ -70,12 +72,12 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
         workplan = CreateTtWorkplan(parameters);
         recipe = CreateRecipe(electronicDeviceProduct, workplan);
 
-        Storage.SaveType(circuitBoardProduct);
-        Storage.SaveType(housingProduct);
-        Storage.SaveType(electronicDeviceProduct);
-        Storage.SaveType(controlCabinetProduct);
-        WorkplanStorage.SaveWorkplan(workplan);
-        Storage.SaveRecipe(recipe);
+        Storage.SaveTypeAsync(circuitBoardProduct);
+        Storage.SaveTypeAsync(housingProduct);
+        Storage.SaveTypeAsync(electronicDeviceProduct);
+        Storage.SaveTypeAsync(controlCabinetProduct);
+        WorkplanStorage.SaveWorkplanAsync(workplan);
+        Storage.SaveRecipeAsync(recipe);
 
         return Task.FromResult(new ProductImporterResult { Saved = true });
     }
@@ -180,8 +182,14 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
             ],
             ExecutionTimeSec = 3
         };
-        var housingAssemblyStep = new AssemblyTask();
-        workplan.AddStep(housingAssemblyStep, housingAssemblyParameters, [start], [housingAssembledConnection, housingAssembledConnection]);
+
+        var housingAssemblyStep = new AssemblyTask
+        {
+            Parameters = housingAssemblyParameters,
+            Inputs = [start],
+            Outputs = [housingAssembledConnection, housingAssembledConnection]
+        };
+        workplan.Add(housingAssemblyStep);
 
         var circuitBoardAssembledConnection = workplan.AddConnector("CircuitBoardAssembled", NodeClassification.Intermediate);
         var circuitBoardAssemblyParameters = new AssemblyParameters()
@@ -199,8 +207,13 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
             ],
             ExecutionTimeSec = 6
         };
-        var circuitBoardAssemblyStep = new AssemblyTask();
-        workplan.AddStep(circuitBoardAssemblyStep, circuitBoardAssemblyParameters, housingAssembledConnection, [circuitBoardAssembledConnection, circuitBoardAssembledConnection]);
+
+        var circuitBoardAssemblyStep = new AssemblyTask
+        {
+            Parameters = circuitBoardAssemblyParameters,
+            Inputs = [housingAssembledConnection],
+            Outputs = [circuitBoardAssembledConnection, circuitBoardAssembledConnection]
+        };
 
         var solderedConnection = workplan.AddConnector("Soldered", NodeClassification.Intermediate);
         var solderingParameters = new SolderingParameters()
@@ -268,9 +281,14 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
         var testingStep = new TestTask("Test-Product-1") { Parameters = testingParameters, Inputs = [solderedConnection], Outputs = [testedConnection, circuitBoardAssembledConnection] };
         workplan.Add(testingStep);
 
+
         var packingParameters = new PackingParameters();
-        var packagingStep = new PackingTask();
-        workplan.AddStep(packagingStep, packingParameters, [testedConnection], [end, end]);
+        var packagingStep = new PackingTask
+        {
+            Parameters = packingParameters,
+            Inputs = [testedConnection],
+            Outputs = [end, end]
+        };
 
         return workplan;
     }
@@ -305,8 +323,14 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
             ],
             ExecutionTimeSec = 3
         };
-        var housingAssemblyStep = new AssemblyTask();
-        workplan.AddStep(housingAssemblyStep, housingAssemblyParameters, [start], [housingAssembledConnection, housingAssembledConnection]);
+
+        var housingAssemblyStep = new AssemblyTask
+        {
+            Parameters = housingAssemblyParameters,
+            Inputs = [start],
+            Outputs = [housingAssembledConnection, housingAssembledConnection]
+        };
+        workplan.Add(housingAssemblyStep);
 
         var circuitBoardAssembledConnection = workplan.AddConnector("CircuitBoardAssembled", NodeClassification.Intermediate);
         var circuitBoardAssemblyParameters = new AssemblyParameters()
@@ -324,8 +348,13 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
             ],
             ExecutionTimeSec = 6
         };
-        var circuitBoardAssemblyStep = new AssemblyTask();
-        workplan.AddStep(circuitBoardAssemblyStep, circuitBoardAssemblyParameters, housingAssembledConnection, [circuitBoardAssembledConnection, circuitBoardAssembledConnection]);
+
+        var circuitBoardAssemblyStep = new AssemblyTask
+        {
+            Parameters = circuitBoardAssemblyParameters,
+            Inputs = [housingAssembledConnection],
+            Outputs = [circuitBoardAssembledConnection, circuitBoardAssembledConnection]
+        };
 
         var solderedConnection = workplan.AddConnector("Soldered", NodeClassification.Intermediate);
         var solderingParameters = new SolderingParameters()
@@ -394,9 +423,18 @@ public class DemoProductImporter : ProductImporterBase<DemoProductImporterConfig
         workplan.Add(testingStep);
 
         var packingParameters = new PackingParameters();
-        var packagingStep = new PackingTask();
-        workplan.AddStep(packagingStep, packingParameters, [testedConnection], [end, end]);
+        var packagingStep = new PackingTask
+        {
+            Parameters = packingParameters,
+            Inputs = [testedConnection],
+            Outputs = [end, end]
+        };
 
         return workplan;
+    }
+
+    protected override Task<ProductImporterResult> ImportAsync(ProductImportContext context, DemoImportParameters parameters, CancellationToken cancellationToken)
+    {
+        throw new System.NotImplementedException();
     }
 }

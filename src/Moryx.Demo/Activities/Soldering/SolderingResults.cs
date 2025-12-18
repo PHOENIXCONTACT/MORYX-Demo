@@ -3,6 +3,7 @@
 
 using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Demo.Properties;
+using Moryx.VisualInstructions;
 using System.ComponentModel.DataAnnotations;
 
 namespace Moryx.Demo.Activities;

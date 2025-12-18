@@ -16,13 +16,21 @@
     <PackageVersion Include="MimeTypeMapOfficial" Version="1.0.17" />
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
 
-    <!-- MORYX Framework -->
+    <PackageVersion Include="Moryx.Media" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.Asp.NetCoreAsp" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.ControlSystem.WorkerSupport.Web" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.Simulation" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.Simulation.Simulator" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.ProcessData.Endpoints" Version="$(MoryxVersion)" />
+
+
+      <!-- MORYX Framework -->
     <PackageVersion Include="Moryx.AbstractionLayer" Version="$(MoryxVersion)" />
     <PackageVersion Include="Moryx.Notifications" Version="$(MoryxVersion)" />
     <PackageVersion Include="Moryx.Model.PostgreSQL" Version="$(MoryxVersion)" />
     <PackageVersion Include="Moryx.Model.Sqlite" Version="$(MoryxVersion)" />
     <PackageVersion Include="Moryx.Runtime.Kernel" Version="$(MoryxVersion)" />
-    <PackageVersion Include="Moryx.Asp.Extensions" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.AspNetCore" Version="$(MoryxVersion)" />
 
     <!-- MORYX Factory -->
     <PackageVersion Include="Moryx.ControlSystem" Version="$(MoryxVersion)" />
@@ -74,10 +82,10 @@
     <PackageVersion Include="Moryx.Notifications.Web" Version="$(MoryxVersion)" />
 
     <!-- MORYX Worker Support -->
-    <PackageVersion Include="Moryx.Resources.AssemblyInstruction" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.Resources.VisualInstructions" Version="$(MoryxVersion)" />
     <PackageVersion Include="Moryx.ControlSystem.WorkerSupport" Version="$(MoryxVersion)" />
-    <PackageVersion Include="Moryx.ControlSystem.VisualInstructions.Endpoints" Version="$(MoryxVersion)" />
-    <PackageVersion Include="Moryx.ControlSystem.WorkerSupport.Web" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.VisualInstructions.Endpoints" Version="$(MoryxVersion)" />
+    <PackageVersion Include="Moryx.VisualInstructions.Web" Version="$(MoryxVersion)" />
 
     <!-- MORYX Launcher -->
     <PackageVersion Include="Moryx.Launcher" Version="$(MoryxVersion)" />
@@ -100,7 +108,6 @@
     
     <!-- MORYX Analytics -->
     <PackageVersion Include="Moryx.Analytics.Server" Version="$(MoryxVersion)" />
-    <PackageVersion Include="Moryx.Analytics.Web" Version="$(MoryxVersion)" />
     
     <!-- MORYX Operators -->
     <PackageVersion Include="Moryx.Operators" Version="$(MoryxVersion)" />
