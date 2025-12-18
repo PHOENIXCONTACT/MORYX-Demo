@@ -3,6 +3,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.Container;
 using Moryx.ControlSystem.Cells;
@@ -21,7 +23,7 @@ public class SolderingOptimizer : CellSelectorBase //<SolderingOptimizerConfig>
     /// </summary>
     public IActivityPool ActivityPool { get; set; }
 
-    public override IReadOnlyList<ICell> SelectCells(IActivity activity, IReadOnlyList<ICell> availableCells)
+    public IReadOnlyList<ICell> SelectCells(Activity activity, IReadOnlyList<ICell> availableCells)
     {
         var solderingActivity = activity as SolderingActivity;
         if (solderingActivity == null || availableCells.Count == 1)
@@ -40,5 +42,10 @@ public class SolderingOptimizer : CellSelectorBase //<SolderingOptimizerConfig>
         return openSoldering >= 3 /*Config.SolderingCountThreshold */ * autoCells.Count
             ? availableCells
             : autoCells;
+    }
+
+    public override Task<IReadOnlyList<ICell>> SelectCellsAsync(Activity activity, IReadOnlyList<ICell> availableCells, CancellationToken cancellationToken)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -6,6 +6,7 @@ using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Processes;
 using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Serialization;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Demo.Activities;
 
@@ -16,7 +17,7 @@ public class PackingParameters : VisualInstructionParameters, IConsultantValues
     [EntrySerialize, DataMember]
     public int Power { get; set; }
 
-    protected override void Populate(IProcess process, Parameters instance)
+    protected override void Populate(Process process, Parameters instance)
     {
         var parameters = (PackingParameters)instance;
     }

@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0
 
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Processes;
@@ -10,6 +11,7 @@ using Moryx.AbstractionLayer.Recipes;
 using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Demo.Products;
 using Moryx.Serialization;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Demo.Activities;
 
@@ -19,7 +21,7 @@ public class AssemblyParameters : VisualInstructionParameters, IConsultantValues
     public int Power { get; set; }
 
     [EntrySerialize, DataMember]
-    [PrimitiveValues(nameof(ElectronicDeviceType.Housing), nameof(ElectronicDeviceType.CircuitBoard))]
+    [AllowedValuesAttribute(nameof(ElectronicDeviceType.Housing), nameof(ElectronicDeviceType.CircuitBoard))]
     public string Property { get; set; }
 
     [DefaultValue(10)]
@@ -28,7 +30,7 @@ public class AssemblyParameters : VisualInstructionParameters, IConsultantValues
 
     public ProductType Material { get; set; }
 
-    protected override void Populate(IProcess process, Parameters instance)
+    protected override void Populate(Process process, Parameters instance)
     {
         base.Populate(process, instance);
 

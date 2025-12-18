@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Capabilities;
 using Moryx.AbstractionLayer.Resources;
@@ -15,9 +16,11 @@ using Moryx.ControlSystem.Cells;
 using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Factory;
 using Moryx.Operators;
+using Moryx.Operators.Attendances;
 using Moryx.Resources.Demo.Messages;
 using Moryx.Resources.Demo.SimulatedDriver;
 using Moryx.Serialization;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Resources.Demo;
 
@@ -68,9 +71,9 @@ public class FixUpCell : DemoCellBase, IOperatorAssignable// ToDo: Fix issue in 
 
     #region Lifecycle
 
-    protected override void OnInitialize()
+    protected async Task OnInitializeAsync()
     {
-        base.OnInitialize();
+        await OnInitializeAsync();
         UpdateCapabilities();
         Driver.Received += OnMessageReceived;
     }
@@ -129,7 +132,8 @@ public class FixUpCell : DemoCellBase, IOperatorAssignable// ToDo: Fix issue in 
         PublishActivityCompleted(CurrentSession as ActivityCompleted);
     }
 
-    public override void ProcessAborting(IActivity affectedActivity)
+    public override void ProcessAborting(
+Activity affectedActivity)
     {
         base.ProcessAborting(affectedActivity);
         ClearInstructions();
@@ -155,6 +159,16 @@ public class FixUpCell : DemoCellBase, IOperatorAssignable// ToDo: Fix issue in 
 
     // Whenever someone is working the fix up cell, it switches to manual mode
     public void AttendanceChanged(IReadOnlyList<AttendanceChangedArgs> attandances) => ManualMode = attandances.Any();
+
+    protected override IEnumerable<Session> ProcessEngineAttached()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override IEnumerable<Session> ProcessEngineDetached()
+    {
+        throw new NotImplementedException();
+    }
 
     #endregion
 

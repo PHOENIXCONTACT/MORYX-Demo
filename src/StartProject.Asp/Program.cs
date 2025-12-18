@@ -114,11 +114,11 @@ try
     app.Services.UseMoryxConfigurations("Config");
 
     var moduleManager = app.Services.GetRequiredService<IModuleManager>();
-    moduleManager.StartModules();
+    moduleManager.StartModulesAsync();
 
     app.Run();
 
-    moduleManager.StopModules();
+    moduleManager.StopModulesAsync();
 }
 finally
 {

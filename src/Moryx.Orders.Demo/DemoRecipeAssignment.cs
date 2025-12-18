@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Recipes;
 using Moryx.Container;
@@ -19,26 +20,43 @@ namespace Moryx.Orders.Demo;
 public class DemoRecipeAssignment : RecipeAssignmentBase<RecipeAssignmentConfig>
 {
     /// <inheritdoc />
-    public override async Task<IReadOnlyList<IProductRecipe>> SelectRecipes(Operation operation, IOperationLogger operationLogger)
+
+    public async Task<IReadOnlyList<IProductRecipe>> SelectRecipeAsync(
+        Operation operation,
+        IOperationLogger operationLogger,
+        CancellationToken cancellationToken) // Pflicht-Token (Plugin/Modul)
     {
         if (operation.CreationContext != null &&
             operation.CreationContext.RecipePreselection != 0)
         {
-            var recipe = ProductManagement.LoadRecipe(operation.CreationContext.RecipePreselection);
-            return [(IProductRecipe)recipe];
+            // Token weiterreichen + await
+            var recipe = await ProductManagement.LoadRecipeAsync(
+                operation.CreationContext.RecipePreselection,
+                cancellationToken);
+
+            return new IProductRecipe[] { (IProductRecipe)recipe };
         }
 
-        if (operation.Recipes.Any() && operation.Recipes[0] is IRecipe template && template.TemplateId != 0)
+        if (operation.Recipes.Any() &&
+            operation.Recipes[0] is IRecipe template &&
+            template.TemplateId != 0)
         {
-            var recipe = ProductManagement.LoadRecipe(template.TemplateId);
-            return [(IProductRecipe)recipe];
+            // Hier fehlte bislang das await und der Token
+            var recipe = await ProductManagement.LoadRecipeAsync(
+                template.TemplateId,
+                cancellationToken);
+
+            return new IProductRecipe[] { (IProductRecipe)recipe };
         }
 
-        return [await LoadDefaultRecipe(operation.Product)];
+        // Hier kommt deine Fehlermeldung her: Token musste übergeben werden
+        var defaultRecipe = await LoadDefaultRecipeAsync(operation.Product, cancellationToken);
+        return new IProductRecipe[] { defaultRecipe };
     }
 
+
     /// <inheritdoc />
-    public override Task<bool> ProcessRecipe(IProductRecipe clone, Operation operation, IOperationLogger operationLogger)
+    public Task<bool> ProcessRecipeAsync(IProductRecipe clone, Operation operation, IOperationLogger operationLogger)
     {
         // Copy values from known recipe types
         // IOrderBasedRecipe
@@ -54,5 +72,15 @@ public class DemoRecipeAssignment : RecipeAssignmentBase<RecipeAssignmentConfig>
         }
 
         return Task.FromResult(true);
+    }
+
+    public override Task<IReadOnlyList<IProductRecipe>> SelectRecipesAsync(Operation operation, IOperationLogger operationLogger, CancellationToken cancellationToken)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override Task<bool> ProcessRecipeAsync(IProductRecipe clone, Operation operation, IOperationLogger operationLogger, CancellationToken cancellationToken)
+    {
+        throw new System.NotImplementedException();
     }
 }

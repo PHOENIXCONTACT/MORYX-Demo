@@ -2,9 +2,11 @@
 // Licensed under the Apache License, Version 2.0
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Capabilities;
 using Moryx.AbstractionLayer.Resources;
@@ -18,6 +20,7 @@ using Moryx.Factory;
 using Moryx.Resources.Demo.Messages;
 using Moryx.Serialization;
 using Moryx.Threading;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Resources.Demo;
 
@@ -124,9 +127,9 @@ public class SolderingCell : DemoCellBase
         }
     }
 
-    protected override void OnInitialize()
+    protected async Task OnInitializeAsync()
     {
-        base.OnInitialize();
+        await OnInitializeAsync();
         UpdateCapabilities();
 
         CellState = "Idle";
@@ -189,5 +192,15 @@ public class SolderingCell : DemoCellBase
     private void IncreaseNominalPower()
     {
         NominalPower++;
+    }
+
+    protected override IEnumerable<Session> ProcessEngineAttached()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override IEnumerable<Session> ProcessEngineDetached()
+    {
+        throw new NotImplementedException();
     }
 }

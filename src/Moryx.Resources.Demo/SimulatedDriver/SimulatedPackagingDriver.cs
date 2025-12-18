@@ -22,7 +22,7 @@ public class SimulatedPackagingDriver : DemoSimulatedDriverBase
 
     public override event EventHandler<object> Received;
 
-    public override void Ready(IActivity activity)
+    public override void Ready(Activity activity)
     {
         Ready(activity.Process.Id);
     }

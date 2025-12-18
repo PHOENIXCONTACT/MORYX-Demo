@@ -15,6 +15,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
+
 
 namespace Moryx.Resources.Demo;
 
@@ -96,25 +98,26 @@ public abstract class DemoCellBase : Cell, INotificationSender, IProcessDataPubl
     public INotificationAdapter NotificationAdapter { get; set; }
 
     [ResourceReference(ResourceRelationType.Driver, IsRequired = true)]
-    public IMessageDriver<object> Driver { get; set; }
+    public IMessageDriver Driver { get; set; }
     #endregion
 
-    protected override void OnInitialize()
+    protected async Task OnInitializeAsync()
     {
-        base.OnInitialize();
         if (string.IsNullOrEmpty(_cellState))
         {
             _cellState = "Idle";
         }
+
+        await OnInitializeAsync();
     }
 
     #region Session
-    public override IEnumerable<Session> ControlSystemAttached()
+    public virtual IEnumerable<Session> GetControlSystemAttached()
     {
         yield break;
     }
 
-    public override IEnumerable<Session> ControlSystemDetached()
+    public virtual IEnumerable<Session> ControlSystemDetached()
     {
         yield break;
     }
@@ -124,11 +127,11 @@ public abstract class DemoCellBase : Cell, INotificationSender, IProcessDataPubl
 
     }
 
-    public override void ProcessAborting(IActivity affectedActivity)
+    public void ProcessAborting(IActivity affectedActivity)
     {
         if (CurrentSession is not ActivityStart activityStart)
         {
-            PublishActivityCompleted(Session.WrapUnknownActivity(affectedActivity));
+            PublishActivityCompleted(Session.WrapUnknownActivity((Activity)affectedActivity));
             return;
         }
 

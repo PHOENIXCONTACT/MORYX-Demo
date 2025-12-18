@@ -21,7 +21,7 @@ namespace Moryx.Resources.Demo.SimulatedDriver
 
         public override event EventHandler<object> Received;
 
-        public override void Ready(IActivity activity)
+        public override void Ready(Activity activity)
             => Received?.Invoke(this, new WorkpieceArrivedMessage { ProcessId = activity.Process.Id });
 
         public override void Ready(long processId) { }

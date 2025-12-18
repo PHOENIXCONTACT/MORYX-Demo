@@ -2,9 +2,11 @@
 // Licensed under the Apache License, Version 2.0
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.ControlSystem.Activities;
@@ -17,6 +19,7 @@ using Moryx.Factory;
 using Moryx.Notifications;
 using Moryx.Resources.Demo.Messages;
 using Moryx.Serialization;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Resources.Demo;
 
@@ -129,9 +132,9 @@ public class PackagingCell : DemoCellBase, INotificationSender
         Capabilities = new PackingCapabilities();
     }
 
-    protected override void OnInitialize()
+    protected async Task OnInitializeAsync()
     {
-        base.OnInitialize();
+        await OnInitializeAsync();
         UpdateCapabilities();
         Driver.Received += OnMessageReceived;
     }
@@ -204,6 +207,16 @@ public class PackagingCell : DemoCellBase, INotificationSender
         CyclesSinceMaintenance++;
         TotalCycles++;
         CheckMaintenancePeriode();
+    }
+
+    protected override IEnumerable<Session> ProcessEngineAttached()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override IEnumerable<Session> ProcessEngineDetached()
+    {
+        throw new NotImplementedException();
     }
     #endregion
 }

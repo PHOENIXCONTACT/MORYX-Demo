@@ -3,6 +3,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.Container;
 using Moryx.ControlSystem.Cells;
@@ -17,7 +19,7 @@ public class LoadBalancer : CellSelectorBase
     /// </summary>
     private readonly Dictionary<IActivity, ICell> _primaryTarget = [];
 
-    public override IReadOnlyList<ICell> SelectCells(IActivity activity, IReadOnlyList<ICell> availableCells)
+    public IReadOnlyList<ICell> SelectCells(IActivity activity, IReadOnlyList<ICell> availableCells)
     {
         // Nothing to balance
         if (availableCells.Count <= 1)
@@ -55,5 +57,10 @@ public class LoadBalancer : CellSelectorBase
         }
 
         return loadBalanced;
+    }
+
+    public override Task<IReadOnlyList<ICell>> SelectCellsAsync(Activity activity, IReadOnlyList<ICell> availableCells, CancellationToken cancellationToken)
+    {
+        throw new System.NotImplementedException();
     }
 }

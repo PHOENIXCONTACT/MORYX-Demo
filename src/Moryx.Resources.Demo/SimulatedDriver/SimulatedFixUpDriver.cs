@@ -23,7 +23,7 @@ public class SimulatedFixUpDriver : DemoSimulatedDriverBase
 
     public override event EventHandler<object> Received;
 
-    public override void Ready(IActivity activity)
+    public override void Ready(Activity activity)
     {
         SimulatedState = SimulationState.Requested;
         Received?.Invoke(this, new WorkpieceArrivedMessage { ProcessId = activity.Process.Id });

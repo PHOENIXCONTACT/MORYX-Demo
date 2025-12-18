@@ -5,6 +5,7 @@ using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Processes;
 using Moryx.AbstractionLayer.Products;
 using Moryx.ControlSystem.VisualInstructions;
+using Moryx.VisualInstructions;
 
 namespace Moryx.Demo.Activities;
 
@@ -12,7 +13,7 @@ public class MaterialChangeParameters : VisualInstructionParameters
 {
     public ProductType Material { get; set; }
 
-    protected override void Populate(IProcess process, Parameters instance)
+    protected override void Populate(Process process, Parameters instance)
     {
         base.Populate(process, instance);
 

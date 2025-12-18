@@ -8,6 +8,7 @@ using Moryx.Container;
 using Moryx.Orders.Assignment;
 using Moryx.Orders.Documents;
 using MimeTypes;
+using System.Threading;
 
 namespace Moryx.Orders.Demo;
 
@@ -30,6 +31,11 @@ public class DemoDocumentLoader : IDocumentLoader
     public void Initialize(DocumentLoaderConfig config)
     {
         _config = config;
+    }
+
+    public Task InitializeAsync(DocumentLoaderConfig config, CancellationToken cancellationToken = default)
+    {
+        throw new System.NotImplementedException();
     }
 
     public async Task<IReadOnlyList<Document>> Load(Operation operation)
@@ -64,11 +70,26 @@ public class DemoDocumentLoader : IDocumentLoader
         return [.. documents];
     }
 
-    public void Start()
+    public Task<IReadOnlyList<Document>> LoadAsync(Operation operation, CancellationToken cancellationToken)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public async Task StartAsync()
     {
     }
 
-    public void Stop()
+    public Task StartAsync(CancellationToken cancellationToken = default)
     {
+        throw new System.NotImplementedException();
+    }
+
+    public async Task StopAsync()
+    {
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken = default)
+    {
+        throw new System.NotImplementedException();
     }
 }
