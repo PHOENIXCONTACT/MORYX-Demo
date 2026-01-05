@@ -73,9 +73,6 @@
     <PackageVersion Include="Moryx.ControlSystem.Processes.Endpoints" Version="$(MoryxVersion)" />
     <PackageVersion Include="Moryx.ControlSystem.ProcessEngine.Web" Version="$(MoryxVersion)" />
 
-    <!-- MORYX Setups -->
-    <PackageVersion Include="Moryx.ControlSystem.SetupProvider" Version="$(MoryxVersion)" />
-
     <!-- MORYX Notifications -->
     <PackageVersion Include="Moryx.Notifications.Publisher" Version="$(MoryxVersion)" />
     <PackageVersion Include="Moryx.Notifications.Endpoints" Version="$(MoryxVersion)" />

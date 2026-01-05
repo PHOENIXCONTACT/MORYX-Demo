@@ -39,7 +39,6 @@
     <PackageReference Include="Moryx.ControlSystem.ProcessEngine" />
     <PackageReference Include="Moryx.ControlSystem.ProcessEngine.Web" />
     <PackageReference Include="Moryx.ControlSystem.Processes.Endpoints" />
-    <PackageReference Include="Moryx.ControlSystem.SetupProvider" />
     <PackageReference Include="Moryx.Notifications.Publisher" />
     <PackageReference Include="Moryx.Resources.VisualInstructions"/>
     <PackageReference Include="Moryx.VisualInstructions.Endpoints" />
