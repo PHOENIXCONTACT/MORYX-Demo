@@ -23,7 +23,7 @@ public class DemoInitializer : ResourceInitializerBase
 
     public override string Description => "Setup the simulation resources for the MORYX Demo";
 
-    public IReadOnlyList<Resource> Execute(IResourceGraph graph)
+    public override Task<ResourceInitializerResult> ExecuteAsync(IResourceGraph graph, object parameters, CancellationToken cancellationToken)
     {
         // Visual instructions
         var instructor = graph.Instantiate<VisualInstructor>();
@@ -240,11 +240,7 @@ public class DemoInitializer : ResourceInitializerBase
         factory.Children.Add(buildingALoc);
         factory.Children.Add(buildingBLoc);
 
-        return [factory];
+        return Task.FromResult(new ResourceInitializerResult() { InitializedResources = [factory], Saved = false });
     }
 
-    public override Task<ResourceInitializerResult> ExecuteAsync(IResourceGraph graph, object parameters, CancellationToken cancellationToken)
-    {
-        throw new System.NotImplementedException();
-    }
 }

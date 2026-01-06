@@ -34,32 +34,6 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
 {
     private readonly Dictionary<Guid, long> _currentSessionInstructionMappings = [];
 
-    event EventHandler<Process> IProcessReporter.ProcessBroken
-    {
-        add
-        {
-            throw new NotImplementedException();
-        }
-
-        remove
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    event EventHandler<Process> IProcessReporter.ProcessRemoved
-    {
-        add
-        {
-            throw new NotImplementedException();
-        }
-
-        remove
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     #region Constructors
 
     [ResourceConstructor, Display(Name = "Default setup for resource")]
@@ -139,7 +113,7 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
         }
     }
 
-    public override IEnumerable<Session> GetControlSystemAttached()
+    protected override IEnumerable<Session> ProcessEngineAttached()
     {
         lock (_workspaceLock)
         {
@@ -147,7 +121,7 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
         }
     }
 
-    public override IEnumerable<Session> ControlSystemDetached()
+    protected override IEnumerable<Session> ProcessEngineDetached()
     {
         lock (_workspaceLock)
         {
@@ -249,14 +223,14 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
     [EntrySerialize, Display(Name = "Report removed process", Description = "Uses the IProcessReporter interface to report the current process as removed")]
     public void ReportRemovedProcess() => Report(p => ProcessRemoved?.Invoke(this, p));
 
-    private void Report(Action<IProcess> invocation)
+    private void Report(Action<Process> invocation)
     {
         if (Workspace.IsEmpty())
         {
             return;
         }
 
-        var processes = Array.Empty<IProcess>();
+        var processes = Array.Empty<Process>();
         lock (_workspaceLock)
         {
             processes = [.. Workspace.Positions.Where(p => !p.IsEmpty()).Select(p => p.Process)];
@@ -264,18 +238,8 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
         Parallel.ForEach(processes, invocation);
     }
 
-    protected override IEnumerable<Session> ProcessEngineAttached()
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override IEnumerable<Session> ProcessEngineDetached()
-    {
-        throw new NotImplementedException();
-    }
-
-    public event EventHandler<IProcess> ProcessBroken;
-    public event EventHandler<IProcess> ProcessRemoved;
+    public event EventHandler<Process> ProcessBroken;
+    public event EventHandler<Process> ProcessRemoved;
 
     #endregion
 }

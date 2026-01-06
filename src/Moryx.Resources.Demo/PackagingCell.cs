@@ -209,15 +209,5 @@ public class PackagingCell : DemoCellBase, INotificationSender
         TotalCycles++;
         CheckMaintenancePeriode();
     }
-
-    protected override IEnumerable<Session> ProcessEngineAttached()
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override IEnumerable<Session> ProcessEngineDetached()
-    {
-        throw new NotImplementedException();
-    }
     #endregion
 }

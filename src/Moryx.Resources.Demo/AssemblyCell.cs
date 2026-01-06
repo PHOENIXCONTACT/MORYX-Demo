@@ -85,7 +85,7 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
         base.OnDispose();
     }
 
-    public override IEnumerable<Session> GetControlSystemAttached()
+    protected override IEnumerable<Session> ProcessEngineAttached()
     {
         yield return Session.StartSession(ActivityClassification.Setup, ReadyToWorkType.Push);
     }
@@ -157,7 +157,7 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
     {
         Instructor.Clear(_instructionId);
         _instructionId = 0;
-        PublishResult((int)DefaultActivityResult.Failed);
+        base.ProcessAborting(affectedActivity);
     }
 
     private void CompleteMaterialChange(int result, ActivityStart session)
@@ -231,13 +231,4 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
         }
     }
 
-    protected override IEnumerable<Session> ProcessEngineAttached()
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override IEnumerable<Session> ProcessEngineDetached()
-    {
-        throw new NotImplementedException();
-    }
 }
