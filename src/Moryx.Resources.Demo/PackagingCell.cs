@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
@@ -98,7 +97,7 @@ public class PackagingCell : DemoCellBase, INotificationSender
 
         if (_instructionId != 0)
         {
-            Instructor.Clear(_instructionId);
+            Instructor?.Clear(_instructionId);
         }
 
         _instructionId = Instructor.Execute(new ActiveInstruction()
@@ -122,7 +121,7 @@ public class PackagingCell : DemoCellBase, INotificationSender
         }
 
         CyclesSinceMaintenance = 0;
-        Instructor.Clear(_instructionId);
+        Instructor?.Clear(_instructionId);
         _instructionId = 0;
     }
     #endregion
@@ -137,19 +136,12 @@ public class PackagingCell : DemoCellBase, INotificationSender
     {
         await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
-        Driver.Received += OnMessageReceived;
     }
 
-    protected override void OnDispose()
-    {
-        Driver.Received -= OnMessageReceived;
-
-        base.OnDispose();
-    }
     #endregion
 
     #region Session
-    private void OnMessageReceived(object sender, object message)
+    protected override void OnMessageReceived(object sender, object message)
     {
         switch (message)
         {

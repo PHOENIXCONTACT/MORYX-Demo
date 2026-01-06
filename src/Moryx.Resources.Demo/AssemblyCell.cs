@@ -75,14 +75,6 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
 
         await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
-        Driver.Received += OnMessageReceived;
-    }
-
-    protected override void OnDispose()
-    {
-        Driver.Received -= OnMessageReceived;
-
-        base.OnDispose();
     }
 
     protected override IEnumerable<Session> ProcessEngineAttached()
@@ -90,7 +82,7 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
         yield return Session.StartSession(ActivityClassification.Setup, ReadyToWorkType.Push);
     }
 
-    private void OnMessageReceived(object sender, object message)
+    protected override void OnMessageReceived(object sender, object message)
     {
         switch (message)
         {
@@ -155,7 +147,7 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
 
     public override void ProcessAborting(Activity affectedActivity)
     {
-        Instructor.Clear(_instructionId);
+        Instructor?.Clear(_instructionId);
         _instructionId = 0;
         base.ProcessAborting(affectedActivity);
     }

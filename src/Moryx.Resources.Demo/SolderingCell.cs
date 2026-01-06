@@ -106,7 +106,7 @@ public class SolderingCell : DemoCellBase
     {
         NominalPower = 240;
         Disabled = false;
-        Instructor.Clear(_instructionId);
+        Instructor?.Clear(_instructionId);
         if (CurrentSession is not NotReadyToWork nrtw)
         {
             return;
@@ -135,20 +135,18 @@ public class SolderingCell : DemoCellBase
 
         CellState = "Idle";
         NominalPower = 240;
-        Driver.Received += OnMessageReceived;
     }
 
-    protected override void OnDispose()
+    protected override async Task OnStopAsync(CancellationToken cancellationToken)
     {
         Instructor?.Clear(_instructionId);
-        Driver.Received -= OnMessageReceived;
-
-        base.OnDispose();
+        await base.OnStopAsync(cancellationToken);
     }
+
     #endregion
 
     #region Session
-    private void OnMessageReceived(object sender, object message)
+    protected override void OnMessageReceived(object sender, object message)
     {
         switch (message)
         {
