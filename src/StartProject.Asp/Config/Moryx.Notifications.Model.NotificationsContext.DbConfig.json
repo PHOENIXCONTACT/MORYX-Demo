@@ -1,9 +1,0 @@
-{
-  "ConfigState": "Generated",
-  "ConnectionSettings": {
-    "$type": "Moryx.Model.Sqlite.SqliteDatabaseConnectionSettings, Moryx.Model.Sqlite",
-    "Database": "NotificationsContext",
-    "ConnectionString": "Data Source=.\\db\\NotificationsContext.db;Mode=ReadWrite;"
-  },
-  "ConfiguratorTypename": "Moryx.Model.Sqlite.SqliteModelConfigurator, Moryx.Model.Sqlite, Version=6.0.0.0, Culture=neutral, PublicKeyToken=null"
-}
