@@ -62,7 +62,7 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
     [ResourceReference(ResourceRelationType.Extension)]
     public IVisualInstructor Instructor { get; set; }
 
-    private readonly object _workspaceLock = new();
+    private readonly Lock _workspaceLock = new();
     [ResourceReference(ResourceRelationType.Extension)]
     public ProcessHolderGroup Workspace { get; set; }
 
@@ -86,13 +86,12 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
     {
         await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
-        Driver.Received += OnMessageReceived;
     }
 
     protected override void UpdateCapabilities()
         => Capabilities = _disabled ? NullCapabilities.Instance : new SolderingCapabilities { ManualSoldering = true };
 
-    private void OnMessageReceived(object sender, object message)
+    protected override void OnMessageReceived(object sender, object message)
     {
         ReadyToWork rtw;
         lock (_workspaceLock)
@@ -127,12 +126,6 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
         {
             return Workspace.Detach();
         }
-    }
-
-    protected override void OnDispose()
-    {
-        Driver.Received -= OnMessageReceived;
-        base.OnDispose();
     }
 
     #endregion
