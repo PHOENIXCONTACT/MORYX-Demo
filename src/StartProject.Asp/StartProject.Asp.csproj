@@ -15,51 +15,60 @@
     <PackageReference Include="Moryx.Model.PostgreSQL" />
     <PackageReference Include="Moryx.Model.Sqlite" />
     <PackageReference Include="Moryx.Runtime.Kernel" />
-    <PackageReference Include="Moryx.Runtime.Endpoints" />
-    <PackageReference Include="Moryx.CommandCenter.Web" />
+
+    <!-- MORYX Resources -->
     <PackageReference Include="Moryx.Resources.Management" />
     <PackageReference Include="Moryx.AbstractionLayer.Resources.Endpoints" />
     <PackageReference Include="Moryx.Resources.Web" />
+
+    <!-- MORYX Products -->
     <PackageReference Include="Moryx.Products.Management" />
     <PackageReference Include="Moryx.AbstractionLayer.Products.Endpoints" />
     <PackageReference Include="Moryx.Products.Web" />
 
-    <PackageReference Include="Moryx.Factory" />
-    <PackageReference Include="Moryx.ControlSystem.WorkerSupport" />
-
+    <!-- MORYX Command Center -->
+    <PackageReference Include="Moryx.Runtime.Endpoints" />
+    <PackageReference Include="Moryx.CommandCenter.Web" />
+    
     <!-- MORYX Media -->
-    <PackageReference Include="Moryx.Media" />
     <PackageReference Include="Moryx.Media.Server" />
     <PackageReference Include="Moryx.Media.Endpoints" />
     <PackageReference Include="Moryx.Media.Web" />
 
-    <!-- MORYX CS -->
-    <PackageReference Include="Moryx.Orders.Management" />
+    <!-- MORYX Process Engine -->
     <PackageReference Include="Moryx.ControlSystem.Jobs.Endpoints" />
     <PackageReference Include="Moryx.ControlSystem.ProcessEngine" />
     <PackageReference Include="Moryx.ControlSystem.ProcessEngine.Web" />
     <PackageReference Include="Moryx.ControlSystem.Processes.Endpoints" />
+
+    <!-- MORYX Setups -->
     <PackageReference Include="Moryx.ControlSystem.SetupProvider" />
+
+    <!-- MORYX Notifications -->
     <PackageReference Include="Moryx.Notifications.Publisher" />
-    <PackageReference Include="Moryx.Resources.VisualInstructions"/>
-    <PackageReference Include="Moryx.VisualInstructions.Endpoints" />
-    <PackageReference Include="Moryx.ControlSystem.WorkerSupport" />
-    <PackageReference Include="Moryx.VisualInstructions.Web" />
     <PackageReference Include="Moryx.Notifications.Endpoints" />
     <PackageReference Include="Moryx.Notifications.Web" />
+
+    <!-- MORYX Visual Instructions -->
+    <PackageReference Include="Moryx.Resources.VisualInstructions"/>
+    <PackageReference Include="Moryx.VisualInstructions.Controller" />
+    <PackageReference Include="Moryx.VisualInstructions.Endpoints" />
+    <PackageReference Include="Moryx.VisualInstructions.Web" />
+    
+    <!-- MORYX Orders -->
+    <PackageReference Include="Moryx.Orders.Management" />
     <PackageReference Include="Moryx.Orders.Endpoints" />
     <PackageReference Include="Moryx.Orders.Web" />
 
+    <!-- MORYX Launcher -->
     <PackageReference Include="Moryx.Launcher" />
 
     <!-- MORYX Worplans -->
     <PackageReference Include="Moryx.Workplans.Editing" />
-    <PackageReference Include="Moryx.Workplans" />
     <PackageReference Include="Moryx.Workplans.Web" />
 
     <!-- MORYX Simulation -->
-    <PackageReference Include="Moryx.Simulation" />
-    <PackageReference Include="Moryx.Simulation.Simulator" />
+    <PackageReference Include="Moryx.ControlSystem.Simulator" />
 
     <!-- MORYX FactoryMonitor  -->
     <PackageReference Include="Moryx.FactoryMonitor.Endpoints" />
@@ -67,12 +76,27 @@
 
     <!-- MORYX Process Data Monitor -->
     <PackageReference Include="Moryx.ProcessData.Monitor" />
+    <PackageReference Include="Moryx.ProcessData.SpreadsheetsListener" />
     <PackageReference Include="Moryx.ProcessData.InfluxDbListener" />
     <PackageReference Include="Moryx.ProcessData.Adapter.ProcessEngine" />
     <PackageReference Include="Moryx.ProcessData.Adapter.ResourceManagement" />
     <PackageReference Include="Moryx.ProcessData.Adapter.NotificationPublisher" />
-    <PackageReference Include="Moryx.ProcessData.Endpoints" />
 
+    <!-- MORYX Operators -->
+    <PackageReference Include="Moryx.Operators" />
+    <PackageReference Include="Moryx.Operators.Management" />
+    <PackageReference Include="Moryx.Operators.Endpoints" />
+    <PackageReference Include="Moryx.Operators.Web" />
+
+    <!-- MORYX Shift Management -->
+    <PackageReference Include="Moryx.Shifts.Management" />
+    <PackageReference Include="Moryx.Shifts.Endpoints" />
+    <PackageReference Include="Moryx.Shifts.Web" />
+
+    <!-- MORYX Drivers -->
+    <PackageReference Include="Moryx.Drivers.Mqtt" />
+    <PackageReference Include="Moryx.Drivers.OpcUa" />
+    
   </ItemGroup>
 
   <ItemGroup>

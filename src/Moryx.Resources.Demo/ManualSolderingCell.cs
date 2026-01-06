@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Processes;
 using Moryx.VisualInstructions;
+using System.Threading;
 
 namespace Moryx.Resources.Demo;
 
@@ -107,9 +108,9 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
 
     #region Lifecycle
 
-    protected async Task OnInitializeAsync()
+    protected override async Task OnInitializeAsync(CancellationToken cancellationToken)
     {
-        await OnInitializeAsync();
+        await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
         Driver.Received += OnMessageReceived;
     }

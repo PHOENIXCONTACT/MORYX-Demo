@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Capabilities;
@@ -71,9 +72,9 @@ public class FixUpCell : DemoCellBase, IOperatorAssignable// ToDo: Fix issue in 
 
     #region Lifecycle
 
-    protected async Task OnInitializeAsync()
+    protected override async Task OnInitializeAsync(CancellationToken cancellationToken)
     {
-        await OnInitializeAsync();
+        await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
         Driver.Received += OnMessageReceived;
     }
