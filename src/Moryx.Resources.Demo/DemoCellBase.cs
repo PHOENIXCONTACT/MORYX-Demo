@@ -14,9 +14,10 @@ using Moryx.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Runtime.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
-
 
 namespace Moryx.Resources.Demo;
 
@@ -27,7 +28,7 @@ public abstract class DemoCellBase : Cell, INotificationSender, IProcessDataPubl
     private readonly Random _randomness = new();
 
     #region Properties
-    public string Identifier => Id.ToString();
+    public string Identifier => Id.ToString(CultureInfo.InvariantCulture);
 
     private string _cellState;
     [DataMember, EntrySerialize, Display(ResourceType = typeof(Strings), Name = nameof(Strings.CELL_STATE))]
@@ -101,14 +102,14 @@ public abstract class DemoCellBase : Cell, INotificationSender, IProcessDataPubl
     public IMessageDriver Driver { get; set; }
     #endregion
 
-    protected async Task OnInitializeAsync()
+    protected override async Task OnInitializeAsync(CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(_cellState))
         {
             _cellState = "Idle";
         }
 
-        await OnInitializeAsync();
+        await base.OnInitializeAsync(cancellationToken);
     }
 
     #region Session

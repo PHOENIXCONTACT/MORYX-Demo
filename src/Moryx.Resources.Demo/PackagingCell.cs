@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Resources;
@@ -132,9 +133,9 @@ public class PackagingCell : DemoCellBase, INotificationSender
         Capabilities = new PackingCapabilities();
     }
 
-    protected async Task OnInitializeAsync()
+    protected override async Task OnInitializeAsync(CancellationToken cancellationToken)
     {
-        await OnInitializeAsync();
+        await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
         Driver.Received += OnMessageReceived;
     }

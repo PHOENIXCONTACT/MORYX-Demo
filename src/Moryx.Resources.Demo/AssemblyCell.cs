@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Capabilities;
@@ -65,14 +66,14 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
     public event EventHandler MaterialChanged;
     public event EventHandler FillingLevelChanged;
 
-    protected async Task OnInitializeAsync()
+    protected override async Task OnInitializeAsync(CancellationToken cancellationToken)
     {
         if (!string.IsNullOrEmpty(MaterialIdentifier))
         {
             ProvidedMaterial = new ProductReference(new ProductIdentity(MaterialIdentifier, ProductIdentity.LatestRevision));
         }
 
-        await OnInitializeAsync();
+        await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
         Driver.Received += OnMessageReceived;
     }
