@@ -19,12 +19,12 @@ public class LoadBalancer : CellSelectorBase
     /// </summary>
     private readonly Dictionary<IActivity, ICell> _primaryTarget = [];
 
-    public IReadOnlyList<ICell> SelectCells(IActivity activity, IReadOnlyList<ICell> availableCells)
+    public override Task<IReadOnlyList<ICell>> SelectCellsAsync(Activity activity, IReadOnlyList<ICell> availableCells, CancellationToken cancellationToken)
     {
         // Nothing to balance
         if (availableCells.Count <= 1)
         {
-            return availableCells;
+            return Task.FromResult(availableCells);
         }
 
         // First clear completed activities from our primary target tracking
@@ -56,11 +56,6 @@ public class LoadBalancer : CellSelectorBase
             _primaryTarget[activity] = loadBalanced[0];
         }
 
-        return loadBalanced;
-    }
-
-    public override Task<IReadOnlyList<ICell>> SelectCellsAsync(Activity activity, IReadOnlyList<ICell> availableCells, CancellationToken cancellationToken)
-    {
-        throw new System.NotImplementedException();
+        return Task.FromResult(loadBalanced as IReadOnlyList<ICell>);
     }
 }

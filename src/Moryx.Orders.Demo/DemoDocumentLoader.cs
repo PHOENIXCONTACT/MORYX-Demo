@@ -28,17 +28,13 @@ public class DemoDocumentLoader : IDocumentLoader
 {
     private DocumentLoaderConfig _config;
 
-    public void Initialize(DocumentLoaderConfig config)
-    {
-        _config = config;
-    }
-
     public Task InitializeAsync(DocumentLoaderConfig config, CancellationToken cancellationToken = default)
     {
-        throw new System.NotImplementedException();
+        _config = config;
+        return Task.CompletedTask;
     }
 
-    public async Task<IReadOnlyList<Document>> Load(Operation operation)
+    public Task<IReadOnlyList<Document>> LoadAsync(Operation operation, CancellationToken cancellationToken)
     {
         var path = ".\\Backups\\Orders";
         if (!Directory.Exists(path))
@@ -67,29 +63,14 @@ public class DemoDocumentLoader : IDocumentLoader
             }
         }
 
-        return [.. documents];
+        return Task.FromResult(documents as IReadOnlyList<Document>);
     }
 
-    public Task<IReadOnlyList<Document>> LoadAsync(Operation operation, CancellationToken cancellationToken)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public async Task StartAsync()
+    public async Task StartAsync(CancellationToken cancellationToken = default)
     {
     }
 
-    public Task StartAsync(CancellationToken cancellationToken = default)
+    public async Task StopAsync(CancellationToken cancellationToken = default)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public async Task StopAsync()
-    {
-    }
-
-    public Task StopAsync(CancellationToken cancellationToken = default)
-    {
-        throw new System.NotImplementedException();
     }
 }

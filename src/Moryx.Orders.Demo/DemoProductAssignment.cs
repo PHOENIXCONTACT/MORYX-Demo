@@ -17,10 +17,10 @@ namespace Moryx.Orders.Demo;
 public class DemoProductAssignment : ProductAssignmentBase<ProductAssignmentConfig>
 {
     /// <inheritdoc />
-    public Task<ProductType> SelectProduct(Operation operation, IOperationLogger operationLogger)
+    public override async Task<ProductType> SelectProductAsync(Operation operation, IOperationLogger operationLogger, CancellationToken cancellationToken)
     {
         var productIdentity = (ProductIdentity)operation.Product.Identity;
-        var selectedType = ProductManagement.LoadTypeAsync(productIdentity);
+        var selectedType = await ProductManagement.LoadTypeAsync(productIdentity, cancellationToken);
 
         if (selectedType == null)
         {
@@ -29,10 +29,5 @@ public class DemoProductAssignment : ProductAssignmentBase<ProductAssignmentConf
         }
 
         return selectedType;
-    }
-
-    public override Task<ProductType> SelectProductAsync(Operation operation, IOperationLogger operationLogger, CancellationToken cancellationToken)
-    {
-        throw new System.NotImplementedException();
     }
 }

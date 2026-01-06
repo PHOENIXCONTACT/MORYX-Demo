@@ -161,16 +161,6 @@ Activity affectedActivity)
     // Whenever someone is working the fix up cell, it switches to manual mode
     public void AttendanceChanged(IReadOnlyList<AttendanceChangedArgs> attandances) => ManualMode = attandances.Any();
 
-    protected override IEnumerable<Session> ProcessEngineAttached()
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override IEnumerable<Session> ProcessEngineDetached()
-    {
-        throw new NotImplementedException();
-    }
-
     #endregion
 
     #region IMachineLocation

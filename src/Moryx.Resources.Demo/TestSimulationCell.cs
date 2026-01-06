@@ -161,15 +161,5 @@ public class TestSimulationCell : DemoCellBase, INotificationSender
         var output = activityStart.CreateResult((int)result);
         PublishActivityCompleted(output);
     }
-
-    protected override IEnumerable<Session> ProcessEngineAttached()
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override IEnumerable<Session> ProcessEngineDetached()
-    {
-        throw new NotImplementedException();
-    }
     #endregion
 }

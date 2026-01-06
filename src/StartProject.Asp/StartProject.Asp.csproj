@@ -124,15 +124,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Config\Moryx.ProcessData.Adapter.ProcessEngine.ModuleConfig.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Config\Moryx.ProcessData.Monitor.ModuleConfig.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Backups\Orders\" />
   </ItemGroup>
 

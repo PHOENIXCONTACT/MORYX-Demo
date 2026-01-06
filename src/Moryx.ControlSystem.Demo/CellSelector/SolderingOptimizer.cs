@@ -23,12 +23,12 @@ public class SolderingOptimizer : CellSelectorBase //<SolderingOptimizerConfig>
     /// </summary>
     public IActivityPool ActivityPool { get; set; }
 
-    public IReadOnlyList<ICell> SelectCells(Activity activity, IReadOnlyList<ICell> availableCells)
+    public override Task<IReadOnlyList<ICell>> SelectCellsAsync(Activity activity, IReadOnlyList<ICell> availableCells, CancellationToken cancellationToken)
     {
         var solderingActivity = activity as SolderingActivity;
         if (solderingActivity == null || availableCells.Count == 1)
         {
-            return availableCells;
+            return Task.FromResult(availableCells);
         }
 
         // Determine automatic cells
@@ -40,12 +40,7 @@ public class SolderingOptimizer : CellSelectorBase //<SolderingOptimizerConfig>
         var openSoldering = ActivityPool.GetByCondition(a => a is SolderingActivity).Count;
         // Use only auto cells as long as activities per cell does not exceed threshold
         return openSoldering >= 3 /*Config.SolderingCountThreshold */ * autoCells.Count
-            ? availableCells
-            : autoCells;
-    }
-
-    public override Task<IReadOnlyList<ICell>> SelectCellsAsync(Activity activity, IReadOnlyList<ICell> availableCells, CancellationToken cancellationToken)
-    {
-        throw new System.NotImplementedException();
+            ? Task.FromResult(availableCells)
+            : Task.FromResult(autoCells as IReadOnlyList<ICell>);
     }
 }

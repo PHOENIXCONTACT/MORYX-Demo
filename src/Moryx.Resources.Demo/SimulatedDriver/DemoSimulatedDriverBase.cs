@@ -28,9 +28,9 @@ public abstract class DemoSimulatedDriverBase : Driver, IMessageDriver, ISimulat
 
     public abstract void Send(object payload);
 
-    protected async Task OnStartAsync()
+    protected override async Task OnStartAsync(CancellationToken cancellationToken)
     {
-        await OnStartAsync();
+        await base.OnStartAsync(cancellationToken);
 
         SimulatedState = SimulationState.Idle;
     }
@@ -61,15 +61,6 @@ public abstract class DemoSimulatedDriverBase : Driver, IMessageDriver, ISimulat
     public abstract void Ready(Activity activity);
     public abstract void Ready(long processId);
     public abstract void Result(SimulationResult result);
-    public IMessageChannel Channel<TChannel>(string identifier)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IMessageChannel Channel<TSend, TReceive>(string identifier)
-    {
-        throw new NotImplementedException();
-    }
 
     public IMessageChannel Channel(string identifier)
     {

@@ -113,12 +113,12 @@ public abstract class DemoCellBase : Cell, INotificationSender, IProcessDataPubl
     }
 
     #region Session
-    public virtual IEnumerable<Session> GetControlSystemAttached()
+    protected override IEnumerable<Session> ProcessEngineAttached()
     {
         yield break;
     }
 
-    public virtual IEnumerable<Session> ControlSystemDetached()
+    protected override IEnumerable<Session> ProcessEngineDetached()
     {
         yield break;
     }
@@ -128,7 +128,7 @@ public abstract class DemoCellBase : Cell, INotificationSender, IProcessDataPubl
 
     }
 
-    public void ProcessAborting(IActivity affectedActivity)
+    public override void ProcessAborting(Activity affectedActivity)
     {
         if (CurrentSession is not ActivityStart activityStart)
         {
