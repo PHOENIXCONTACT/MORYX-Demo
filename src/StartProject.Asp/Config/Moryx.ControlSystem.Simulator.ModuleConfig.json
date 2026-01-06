@@ -1,0 +1,8 @@
+{
+  "SuccessRate": 100,
+  "MovingDuration": 3000,
+  "DefaultExecutionTime": 2400,
+  "Acceleration": 1.0,
+  "SpecificExecutionTimeSettings": [],
+  "ConfigState": "Valid"
+}
