@@ -76,7 +76,23 @@ public class FixUpCell : DemoCellBase, IOperatorAssignable// ToDo: Fix issue in 
     {
         await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
+    }
+
+    protected override Task OnStartAsync(CancellationToken cancellationToken)
+    {
         Driver.Received += OnMessageReceived;
+
+        return base.OnStartAsync(cancellationToken);
+    }
+
+    protected override Task OnStopAsync(CancellationToken cancellationToken)
+    {
+        if (Driver != null)
+        {
+            Driver.Received -= OnMessageReceived;
+        }
+
+        return base.OnStopAsync(cancellationToken);
     }
 
     protected override void UpdateCapabilities() => Capabilities = _disabled
@@ -94,11 +110,7 @@ public class FixUpCell : DemoCellBase, IOperatorAssignable// ToDo: Fix issue in 
         PublishReadyToWork(CurrentSession as ReadyToWork);
     }
 
-    protected override void OnDispose()
-    {
-        Driver.Received -= OnMessageReceived;
-        base.OnDispose();
-    }
+
 
     #endregion
 

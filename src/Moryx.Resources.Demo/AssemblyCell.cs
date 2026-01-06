@@ -75,14 +75,23 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
 
         await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
-        Driver.Received += OnMessageReceived;
     }
 
-    protected override void OnDispose()
+    protected override Task OnStartAsync(CancellationToken cancellationToken)
     {
-        Driver.Received -= OnMessageReceived;
+        Driver.Received += OnMessageReceived;
 
-        base.OnDispose();
+        return base.OnStartAsync(cancellationToken);
+    }
+
+    protected override Task OnStopAsync(CancellationToken cancellationToken)
+    {
+        if (Driver != null)
+        {
+            Driver.Received -= OnMessageReceived;
+        }
+
+        return base.OnStopAsync(cancellationToken);
     }
 
     protected override IEnumerable<Session> ProcessEngineAttached()

@@ -58,15 +58,22 @@ public class TestSimulationCell : DemoCellBase, INotificationSender
     {
         await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
-
-        Driver.Received += OnMessageReceived;
     }
 
-    protected override void OnDispose()
+    protected override Task OnStartAsync(CancellationToken cancellationToken)
     {
-        Driver.Received -= OnMessageReceived;
+        Driver.Received += OnMessageReceived;
+        return Task.CompletedTask;
+    }
 
-        base.OnDispose();
+    protected override Task OnStopAsync(CancellationToken cancellationToken)
+    {
+        if (Driver != null)
+        {
+            Driver.Received -= OnMessageReceived;
+        }
+
+        return Task.CompletedTask;
     }
 
     #region Session

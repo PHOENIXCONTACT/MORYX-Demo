@@ -135,16 +135,30 @@ public class SolderingCell : DemoCellBase
 
         CellState = "Idle";
         NominalPower = 240;
-        Driver.Received += OnMessageReceived;
     }
 
-    protected override void OnDispose()
+    protected override Task OnStartAsync(CancellationToken cancellationToken)
     {
-        Instructor?.Clear(_instructionId);
-        Driver.Received -= OnMessageReceived;
+        Driver.Received += OnMessageReceived;
 
-        base.OnDispose();
+        return base.OnStartAsync(cancellationToken);
     }
+
+    protected override Task OnStopAsync(CancellationToken cancellationToken)
+    {
+        if (Instructor != null)
+        {
+            Instructor.Clear(_instructionId);
+        }
+
+        if (Driver != null)
+        {
+            Driver.Received -= OnMessageReceived;
+        }
+
+        return base.OnStopAsync(cancellationToken);
+    }
+
     #endregion
 
     #region Session

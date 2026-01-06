@@ -86,7 +86,23 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
     {
         await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
+    }
+
+    protected override Task OnStartAsync(CancellationToken cancellationToken)
+    {
         Driver.Received += OnMessageReceived;
+
+        return base.OnStartAsync(cancellationToken);
+    }
+
+    protected override Task OnStopAsync(CancellationToken cancellationToken)
+    {
+        if (Driver != null)
+        {
+            Driver.Received -= OnMessageReceived;
+        }
+
+        return base.OnStopAsync(cancellationToken);
     }
 
     protected override void UpdateCapabilities()
@@ -127,12 +143,6 @@ public class ManualSolderingCell : DemoCellBase, IProcessReporter
         {
             return Workspace.Detach();
         }
-    }
-
-    protected override void OnDispose()
-    {
-        Driver.Received -= OnMessageReceived;
-        base.OnDispose();
     }
 
     #endregion
