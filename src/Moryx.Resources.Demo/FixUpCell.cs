@@ -76,14 +76,13 @@ public class FixUpCell : DemoCellBase, IOperatorAssignable// ToDo: Fix issue in 
     {
         await base.OnInitializeAsync(cancellationToken);
         UpdateCapabilities();
-        Driver.Received += OnMessageReceived;
     }
 
     protected override void UpdateCapabilities() => Capabilities = _disabled
         ? Capabilities = NullCapabilities.Instance
         : new ProcessFixupCapabilities();
 
-    private void OnMessageReceived(object sender, object message)
+    protected override void OnMessageReceived(object sender, object message)
     {
         if (message is not WorkpieceArrivedMessage arrived)
         {
@@ -92,12 +91,6 @@ public class FixUpCell : DemoCellBase, IOperatorAssignable// ToDo: Fix issue in 
 
         CurrentSession = Session.StartSession(ActivityClassification.Production, ReadyToWorkType.Pull, arrived.ProcessId);
         PublishReadyToWork(CurrentSession as ReadyToWork);
-    }
-
-    protected override void OnDispose()
-    {
-        Driver.Received -= OnMessageReceived;
-        base.OnDispose();
     }
 
     #endregion
@@ -147,7 +140,7 @@ Activity affectedActivity)
             return;
         }
 
-        Instructor.Clear(_currentInstruction);
+        Instructor?.Clear(_currentInstruction);
         _currentInstruction = 0;
         CompleteActivity(null);
     }

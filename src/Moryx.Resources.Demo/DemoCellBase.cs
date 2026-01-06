@@ -1,16 +1,6 @@
 // Copyright (c) 2025, Phoenix Contact GmbH & Co. KG
 // Licensed under the Apache License, Version 2.0
 
-using Moryx.AbstractionLayer.Activities;
-using Moryx.AbstractionLayer.Drivers.Message;
-using Moryx.AbstractionLayer.Resources;
-using Moryx.ControlSystem.Cells;
-using Moryx.Demo.Properties;
-using Moryx.Factory;
-using Moryx.Notifications;
-using Moryx.ProcessData;
-using Moryx.Resources.Demo.Messages;
-using Moryx.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,6 +8,18 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Moryx.AbstractionLayer.Activities;
+using Moryx.AbstractionLayer.Drivers.Message;
+using Moryx.AbstractionLayer.Resources;
+using Moryx.ControlSystem.Activities;
+using Moryx.ControlSystem.Cells;
+using Moryx.Demo.Activities;
+using Moryx.Demo.Properties;
+using Moryx.Factory;
+using Moryx.Notifications;
+using Moryx.ProcessData;
+using Moryx.Resources.Demo.Messages;
+using Moryx.Serialization;
 
 namespace Moryx.Resources.Demo;
 
@@ -111,6 +113,18 @@ public abstract class DemoCellBase : Cell, INotificationSender, IProcessDataPubl
 
         await base.OnInitializeAsync(cancellationToken);
     }
+
+    protected override async Task OnStartAsync(CancellationToken cancellationToken)
+    {
+        Driver?.Received += OnMessageReceived;
+    }
+
+    protected override async Task OnStopAsync(CancellationToken cancellationToken)
+    {
+        Driver?.Received -= OnMessageReceived;
+    }
+
+    protected abstract void OnMessageReceived(object sender, object message);
 
     #region Session
     protected override IEnumerable<Session> ProcessEngineAttached()
