@@ -14,6 +14,6 @@
     <WarningsAsErrors>$(WarningsAsErrors);NU1605;NU1604</WarningsAsErrors>
   </PropertyGroup> 
   <PropertyGroup>
-    <MoryxVersion>10.0.0-future.*</MoryxVersion>
+    <MoryxVersion>10.*</MoryxVersion>
   </PropertyGroup>
 </Project>
