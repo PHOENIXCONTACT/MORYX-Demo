@@ -2,7 +2,7 @@
 
 # MORYX Demo Project
 <p align="center">
-    <a href="https://github.com/PHOENIXCONTACT/MORYX-Framework/tree/future">
+    <a href="https://github.com/PHOENIXCONTACT/MORYX-Framework">
         <img src="https://img.shields.io/badge/MORYX%2010-Check%20Out-0098A1?style=for-the-badge" alt="MORYX 10 Fully Open Source" />
     </a>
 </p>
@@ -24,7 +24,7 @@ All required configuration files and SQLite databases are already checked in to 
 ## Demo Quick Start
 ### Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) installed
+- [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) installed
 - Visual Studio 2022 or newer, [Visual Studio Code](https://code.visualstudio.com/) with the [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) and [NuGet Package Manager extension](https://marketplace.visualstudio.com/items?itemName=jmrog.vscode-nuget-package-manager) or whatever your favorite IDE supporting .NET development is
 
 ### Build and Run 
