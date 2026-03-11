@@ -1,7 +1,7 @@
 
 # MORYX Demo Project
 <p align="center">
-    <a href="https://github.com/PHOENIXCONTACT/MORYX-Framework/tree/future">
+    <a href="https://github.com/PHOENIXCONTACT/MORYX-Framework">
         <img src="https://img.shields.io/badge/MORYX%2010-Check%20Out-0098A1?style=for-the-badge" alt="MORYX 10 Fully Open Source" />
     </a>
 </p>
