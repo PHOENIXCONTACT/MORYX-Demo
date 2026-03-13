@@ -79,6 +79,7 @@ try
     #endregion
 
     var app = builder.Build();
+    app.UsePathBase("/moryx-demo");
     var env = app.Environment;
 
     #region Startup Configure App

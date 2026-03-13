@@ -6,7 +6,7 @@ variables:
   MAINTAINER: 'tfuchs@phoenixcontact.com' 
   PROJECT_TYPE: 'exe'
   REGISTRY_NAMESPACE: 'moryx'
-  linux_image:  $CI_REGISTRY/msy/dotnet-sdk-node:8.0.401
+  linux_image:  $linux_web_image
 
 include:
   - project: 'ms/moryx/cicd-templates'
