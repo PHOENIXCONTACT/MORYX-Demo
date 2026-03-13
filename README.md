@@ -1,5 +1,4 @@
 
-
 # MORYX Demo Project
 <p align="center">
     <a href="https://github.com/PHOENIXCONTACT/MORYX-Framework/tree/future">
@@ -19,63 +18,23 @@ Recommended repository for demonstrating a large portion of the functionality pr
 The project includes a simulated production of an `ElectronicDevice` product consisting of a `CircuitBoard` and a `Housing` component.
 For producing such a product simulated `AssemblyCell`s, `SolderingCell`s (for manual and automatic soldering), `TestingCell`s and a `PackagingCell` are included.
 
-All required configuration files and SQLite databases are already checked in to the repository, so you can start the project easily without any additional setup.
+All required configuration files and SQLite databases are already checked into the repository, so you can start the project easily without any additional setup.
+
+## General Information
+- The MORYX Demo Project is a fork from the MORYX-Demo from [PHOENIX CONTACT - GitHub](https://github.com/PHOENIXCONTACT/MORYX-Demo).
+- Changes should only be made to the MORYX Demo on GitHub. After that, merge the new state from GitHub into this version.
+- A commit or push to the internal branch triggers the build of a Docker Image, which is stored in the [Phoenix Contact Docker Registry](http://dockerregistry.europe.phoenixcontact.com/#browse/search/docker=attributes.docker.imageName%3Dmoryx%2F*) 
 
 ## Demo Quick Start
 ### Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) installed
+- [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) installed
 - Visual Studio 2022 or newer, [Visual Studio Code](https://code.visualstudio.com/) with the [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) and [NuGet Package Manager extension](https://marketplace.visualstudio.com/items?itemName=jmrog.vscode-nuget-package-manager) or whatever your favorite IDE supporting .NET development is
 
-### Build and Run 
-1. Open the `Demo.sln` solution in Visual Studio or Visual Studio Code.
-2. Set `StartProject.Asp` as the startup project.
-3. Build the solution.
-4. Run the application.
+## Adaptations for the internal Demo
+- (e.g. internal Moduls)
+- 
 
-## Overview of the different projects
-- *Moryx.ControlSystem.Demo*: Setup Triggers
-- *Moryx.Demo*: Activities, Capabilities, ProductTypes...
-- *Moryx.Demo.Tests*: Unit Tests
-- *Moryx.Orders.Demo*: ProductsAssignments, RecipeAssignments...
-- *Moryx.Products.Demo*: ProductImporters
-- *Moryx.Resources.Demo*: Resources including their states
-- *StartProject*: Starts the application, contains references to all projects except for tests
-
-## Trouble Shooting
-
-If you run into problems with the template or MORYX development in general, feel free to join our Gitter channel, ask on StackOverflow using the [`moryx`](https://stackoverflow.com/questions/tagged/moryx) tag or open an issue. 
-
-<!-- ToDo: Add access management to repository
-
-#### Adding Identity Management
-To use the identity management feature of Moryx you need a running identity server.
-By default the Demo uses the Moryx Identity Server.
-
-In order to use the server either execute the `Moryx.Identity.IdentityServer.exe`, if you received a *.zip* directory with the respective files. 
-Otherwise, clone the [IdentityManagement repository](https://git-ctvc.europe.phoenixcontact.com/moryx/identitymanagement) and follow the instructions under [Build and Run](https://git-ctvc.europe.phoenixcontact.com/moryx/identitymanagement#build-and-run-the-moryx-iam-server).
-
-Note: The identity management is disabled when the Demo client is launched in debug mode, switch to release mode to demonstrate this feature.
-
-After you have done this you can use the admin credentials specified in the project mentioned above to login at the Client. 
-
-(*If you use a different identity server, you need to adjust the user management config in [here](src\Simulation.UI\Config)*)
-
-#### Using a prefilled Identity Database
-If you use the default Moryx Identity Server as described above, you can make use of a prefilled database of Users with Permissions and Roles.
-In order to do that, import the database dump in (*data/IdentityServer.sql*) using the [Query Tool](https://www.pgadmin.org/docs/pgadmin4/development/query_tool.html) of pgAdmin on the IdentityServer database.
-This database was created automatically in the previous step.
-
-The database includes the following Users and Roles
-| User | Password | Role |
-|--------------|-----------------|------------|
-| ProductsEditor | ProductsEditor1! | ProductsEditor |
-| ResourcesEditor | ResourcesEditor1! | ResourcesEditor |
-| MachineEditor | MachineEditor1! | ProductsEditor, ResourcesEditor |
-| ProductsAdmin | ProductsAdmin1! | ProductsAdmin |
-| ResourcesAdmin | ResourcesAdmin1! | ResourcesAdmin |
-| MachineAdmin | MachineAdmin1! | ProductsAdmin, ResourcesAdmin |
-
-An Editor role has all permissions in its respective UIs despite the permissions to Add or Import new entities or Show the AspectConfigurator.
-These permissions are assigned to the Admin roles in addition to the permissions of the Editor roles.
-The MachineAdmin and MachineEditor users combine the Editor and Admin roles of all UIs. -->
+## additional Functions:
+- (e.g. import orders from Hydra)
+- 
