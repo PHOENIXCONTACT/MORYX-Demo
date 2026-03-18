@@ -13,13 +13,16 @@
       "SortOrder": 1
     }
   ],
+  "SaveInstancesOnInterrupt": false,
   "RemovalMessage": "Remove broken process from carrier!",
   "UnassignedActivitySeverity": "Error",
   "ActivityTimeoutSeverity": "Warning",
-  "TimeoutCalculation": "OneSigma",
+  "TimeoutCalculation": "Manual",
   "SampleSize": 1000,
-  "ManualShutdownTimeoutSec": 30,
+  "ManualShutdownTimeoutSec": 5,
   "BootSyncTimeoutSec": 5,
   "RebootCompleteInitial": false,
+  "JobListStopTimeout": 5,
+  "SetupJobRetryLimit": 3,
   "ConfigState": "Generated"
 }
