@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Moryx.AbstractionLayer.Drivers;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.Container;
@@ -51,6 +52,29 @@ public class TestCell : Resource
     public void CreateWithExistingDriverId([AvailableResources(typeof(TestDriver), returnId: true)] long driverId)
     {
         Driver = Graph.GetResource<TestDriver>(driverId);
+    }
+
+    [ResourceConstructor]
+    public async Task CreateDriverAsync(string driverName, string initial)
+    {
+        var driver = Graph.Instantiate<TestDriver>(driverName, "");
+        driver.Strings ??= new();
+        driver.Strings.Add(initial);
+        await Graph.SaveAsync(driver);
+        Driver = driver;
+    }
+
+    [ResourceConstructor]
+    public void CreateDriver(string driverName, string initial, bool save)
+    {
+        var driver = Graph.Instantiate<TestDriver>(driverName, "");
+        driver.Strings ??= new();
+        driver.Strings.Add(initial);
+        if(save)
+        {
+            Graph.SaveAsync(driver).GetAwaiter().GetResult();
+        }
+        Driver = driver;
     }
 }
 
