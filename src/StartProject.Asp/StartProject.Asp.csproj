@@ -51,7 +51,7 @@
     <PackageReference Include="Moryx.Notifications.Web" />
 
     <!-- MORYX Visual Instructions -->
-    <PackageReference Include="Moryx.Resources.VisualInstructions"/>
+    <PackageReference Include="Moryx.Resources.VisualInstructions" />
     <PackageReference Include="Moryx.VisualInstructions.Controller" />
     <PackageReference Include="Moryx.VisualInstructions.Endpoints" />
     <PackageReference Include="Moryx.VisualInstructions.Web" />
@@ -118,13 +118,6 @@
   <ItemGroup>
     <None Update="Backups\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Config\*.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="db\**">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </None>
   </ItemGroup>
 
