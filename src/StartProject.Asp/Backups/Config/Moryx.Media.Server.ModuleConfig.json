@@ -1,5 +1,5 @@
 {
-  "StoragePath": "Backups\\MediaServer",
+  "StoragePath": "MediaServer",
   "MaxFileSizeInMb": 10,
   "SupportedFileTypes": [
     ".png",

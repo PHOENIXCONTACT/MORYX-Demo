@@ -15,7 +15,7 @@
     "PluginName": "SingleJobOperationDispatcher"
   },
   "Documents": {
-    "DocumentsPath": ".\\Backups\\Orders",
+    "DocumentsPath": ".\\Orders",
     "DocumentLoader": {
       "PluginName": "DemoDocumentLoader"
     }

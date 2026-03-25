@@ -12,5 +12,7 @@
 *.xlsx filter=lfs diff=lfs merge=lfs -text
 *.exe filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
-src/StartProject.Asp/Backups/** filter=lfs diff=lfs merge=lfs -text
+src/StartProject.Asp/Backups/db/** filter=lfs diff=lfs merge=lfs -text
+src/StartProject.Asp/Backups/MediaServer/** filter=lfs diff=lfs merge=lfs -text
+src/StartProject.Asp/Backups/Orders/** filter=lfs diff=lfs merge=lfs -text
 src/StartProject.Asp/db/** filter=lfs diff=lfs merge=lfs -text

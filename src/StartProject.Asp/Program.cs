@@ -21,6 +21,10 @@ using System.Text.Json.Serialization;
 
 try
 {
+    // StartUpHook
+    var hook = new StartUpHook();
+    hook.EnsureFileExist();
+
     // Initialize Logging
     LogManager.Setup().LoadConfigurationFromFile("Config/nlog.config");
     AppDomainBuilder.LoadAssemblies();
