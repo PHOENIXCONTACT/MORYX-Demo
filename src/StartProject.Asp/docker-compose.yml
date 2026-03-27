@@ -1,0 +1,23 @@
+services:
+  moryx:
+    # Docker image pulled from the Phoenix Contact registry
+    image: dockerregistry.europe.phoenixcontact.com/moryx/moryx-demo-projekt:latest
+    environment:
+      # Sets the URL under which ASP.Net Core is reachable inside the container
+      - ASPNETCORE_URLS=http://0.0.0.0:5000
+    volumes:
+      # Provide required folders from the host to the container
+      # The application depends on these existing directories
+      - ./db:/app/StartProject.Asp/db
+      - ./Config:/app/StartProject.Asp/Config
+      - ./MediaServer:/app/StartProject.Asp/MediaServer
+      - ./Orders:/app/StartProject.Asp/Orders
+    # Set the working directory for the application
+    working_dir: /app/StartProject.Asp
+    # Run as user with UID:GID 1010:1010
+    user: 1010:1010
+    # Command executed to launch the application
+    command: ./StartProject.Asp
+    ports:
+      # Maps container port 5000 to host port 5000, accessible via http://localhost:5000
+      - 5000:5000
