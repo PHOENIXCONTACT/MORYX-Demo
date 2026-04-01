@@ -28,35 +28,6 @@
           "IsEnabled": true
         }
       ]
-    },
-    {
-      "$type": "Moryx.ProcessData.InfluxDbListener.InfluxDbListenerConfig, Moryx.ProcessData.InfluxDbListener",
-      "PluginName": "InfluxDbListener",
-      "Host": "localhost",
-      "Port": 0,
-      "Username": null,
-      "Password": null,
-      "DatabaseName": null,
-      "ReportIntervalMs": 10000,
-      "ListenerName": "Enterprise Cloud Analytics",
-      "MeasurandConfigs": [
-        {
-          "Name": "controlSystem_activities",
-          "IsEnabled": false
-        },
-        {
-          "Name": "controlSystem_processes",
-          "IsEnabled": false
-        },
-        {
-          "Name": "cell_report",
-          "IsEnabled": false
-        },
-        {
-          "Name": "notifications_acknowledged",
-          "IsEnabled": false
-        }
-      ]
     }
   ],
   "ConfigState": "Valid"

@@ -21,3 +21,19 @@ services:
     ports:
       # Maps container port 5000 to host port 5000, accessible via http://localhost:5000
       - 5000:5000
+ 
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    restart: unless-stopped
+    env_file:
+      - ../../influxdb.env
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-config:/etc/influxdb2
+      - influxdb-storage:/var/lib/influxdb2
+ 
+volumes:
+  influxdb-config:
+  influxdb-storage:
