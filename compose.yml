@@ -63,15 +63,17 @@ services:
       - postgres
 
   moryx:
-    build:
-      context: .
-      dockerfile: ./src/StartProject.Asp/Dockerfile
-    container_name: moryx-demo
-    entrypoint: ["/app/StartProject.Asp/StartProject.Asp"]
-    restart: unless-stopped
+    image: dockerregistry.europe.phoenixcontact.com/moryx/moryx-demo-projekt:latest
     volumes:
-      - moryx-config:/app/Config
-      - moryx-logs:/app/Logs
+      - ./src/StartProject.Asp/db:/app/StartProject.Asp/db
+      - ./src/StartProject.Asp/Config:/app/StartProject.Asp/Config 
+      - ./src/StartProject.Asp/MediaServer:/app/StartProject.Asp/MediaServer
+      - ./src/StartProject.Asp/Orders:/app/StartProject.Asp/Orders
+    working_dir: /app/StartProject.Asp
+    user: 1010:1010
+    command: ./StartProject.Asp
+    ports:
+      - 8080:8080
     depends_on:
       - influxdb
       - postgres
