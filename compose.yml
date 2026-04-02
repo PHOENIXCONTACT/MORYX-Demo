@@ -29,6 +29,8 @@ services:
       # Dashboard Settings
       - GF_DASHBOARDS_MIN_REFRESH_INTERVAL=12h
       # ToDo: Email or Alert Settings
+    ports:
+      - 3000:3000
     volumes:
       # Initialize grafana
       - ./docker/grafana/datasources:/etc/grafana/provisioning/datasources/
