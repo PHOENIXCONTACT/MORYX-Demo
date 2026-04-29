@@ -13,6 +13,8 @@ using Moryx.AbstractionLayer.Capabilities;
 using Moryx.AbstractionLayer.Products;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.Bindings;
+using Moryx.Configuration;
+using Moryx.Container;
 using Moryx.ControlSystem.Activities;
 using Moryx.ControlSystem.Cells;
 using Moryx.ControlSystem.Materials;
@@ -21,6 +23,7 @@ using Moryx.Demo.Activities;
 using Moryx.Demo.Capabilities;
 using Moryx.Demo.Properties;
 using Moryx.Factory;
+using Moryx.Modules;
 using Moryx.Notifications;
 using Moryx.Resources.Demo.Messages;
 using Moryx.Serialization;
@@ -29,6 +32,7 @@ using Moryx.VisualInstructions;
 namespace Moryx.Resources.Demo;
 
 [ResourceRegistration]
+[DependencyRegistration(typeof(ITestPlugin), Initializer = typeof(MyInitializer))]
 public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSender
 {
     private readonly IBindingResolverFactory _resolverFactory = new ResourceBindingResolverFactory();
@@ -38,6 +42,13 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
 
     [ResourceReference(ResourceRelationType.Custom)]
     public IVisualInstructor SetupInstructor { get; set; }
+
+    [EntrySerialize, DataMember]
+    public string[] TestStrings { get; set; } = [];
+
+    [EntrySerialize, DataMember]
+    [PluginConfigs(typeof(ITestPlugin))]
+    public TestConfigBase TestConfig { get; set; }
 
     [EntrySerialize, Display(ResourceType = typeof(Strings), Name = nameof(Strings.NOMINAL_POWER))]
     [EntryVisualization("W", "electrical_services")]
@@ -223,4 +234,46 @@ public class AssemblyCell : DemoCellBase, IMaterialContainer, INotificationSende
         }
     }
 
+}
+
+public interface ITestPlugin : IConfiguredInitializable<TestConfigBase>
+{
+    
+}
+
+[Plugin(LifeCycle.Transient, typeof(ITestPlugin)), ExpectedConfig(typeof(TestConfig1))]
+public class TestPlugin1 : ITestPlugin
+{
+    public void Initialize(TestConfigBase config)
+    {
+    }
+}
+
+[Plugin(LifeCycle.Transient, typeof(ITestPlugin)), ExpectedConfig(typeof(TestConfig2))]
+public class TestPlugin2 : ITestPlugin
+{
+    public void Initialize(TestConfigBase config)
+    {
+    }
+}
+
+public class TestConfig2 : TestConfigBase
+{
+}
+
+public class TestConfig1: TestConfigBase
+{
+}
+
+public class TestConfigBase : IPluginConfig
+{
+    public string PluginName => nameof(TestConfigBase);
+}
+
+public class MyInitializer : ISubInitializer
+{
+    public void Initialize(Container.IContainer container)
+    {
+        container.LoadComponents<ITestPlugin>();
+    }
 }

@@ -10,7 +10,7 @@ namespace Moryx.Demo.Products;
 [Display(ResourceType = typeof(Strings), Name = nameof(Strings.ARTICLE))]
 public class ElectronicDeviceType : ProductType
 {
-    [Display(ResourceType = typeof(Strings), Name = nameof(Strings.HOUSING))]
+    [Display(ResourceType = typeof(Strings), Name = nameof(Strings.HOUSING), Description = "Some very long description to test the UI for elipsis handling and possible extensions")]
     public ProductPartLink<HousingType> Housing { get; set; }
 
     [Display(ResourceType = typeof(Strings), Name = nameof(Strings.CIRCUIT_BOARD))]

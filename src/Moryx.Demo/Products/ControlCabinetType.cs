@@ -13,9 +13,14 @@ namespace Moryx.Demo.Products;
 [Display(ResourceType = typeof(Strings), Name = nameof(Strings.CONTROL_CABINET))]
 public class ControlCabinetType : ProductType
 {
-
-    [DisplayName("Part Link"), Description(" Parts")]
+    [DisplayName("Boards"), Description("A List of circuit boards")]
     public List<ProductPartLink<CircuitBoardType>> Parts { get; set; } = [];
+
+    [DisplayName("Devices"), Description("Another list, this time with articles")]
+    public List<ElectronicDevivePartLink> Devices { get; set; } = [];
+
+    [DisplayName("Main Device"), Description("A single article")]
+    public ElectronicDevivePartLink MainDevice { get; set; }
 
     [EntrySerialize, Display(ResourceType = typeof(Strings), Name = nameof(Strings.WEIGHT))]
     public double Weight { get; set; }

@@ -3,6 +3,9 @@
   "ProductAssignment": {
     "PluginName": "DemoProductAssignment"
   },
+  "PartsAssignment": {
+    "PluginName": "DefaultPartsAssignment"
+  },
   "RecipeAssignment": {
     "PluginName": "DemoRecipeAssignment"
   },
@@ -30,5 +33,8 @@
     "UseAdviceExecutorForOrderAdvice": false
   },
   "MaxRunningOperations": 4,
+  "Notifications": {
+    "EnableAmountReachedNotification": false
+  },
   "ConfigState": "Generated"
 }

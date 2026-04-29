@@ -139,6 +139,26 @@
       "TargetType": "Moryx.Demo.Products.ElectronicDeviceType",
       "PartName": "CircuitBoard",
       "PartCreation": "FromPartLink"
+    },
+    {
+      "$type": "Moryx.Products.Management.GenericLinkConfiguration, Moryx.Products.Management",
+      "PluginName": "GenericLinkStrategy",
+      "JsonColumn": "Text8",
+      "PropertyConfigs": [
+        {
+          "PropertyName": "Name",
+          "PluginName": "TextColumnMapper",
+          "Column": "Text1"
+        },
+        {
+          "PropertyName": "Position",
+          "PluginName": "TextColumnMapper",
+          "Column": "Text2"
+        }
+      ],
+      "TargetType": "Moryx.Demo.Products.ControlCabinetType",
+      "PartName": "Devices",
+      "PartCreation": "FromPartLink"
     }
   ],
   "RecipeStrategies": [

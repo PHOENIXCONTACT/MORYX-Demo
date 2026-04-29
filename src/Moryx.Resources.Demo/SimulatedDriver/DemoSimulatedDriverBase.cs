@@ -73,6 +73,12 @@ public abstract class DemoSimulatedDriverBase : Driver, IMessageDriver, ISimulat
     }
 
     public abstract event EventHandler<object> Received;
+
+    [ResourceConstructor]
+    public void SimpleConstructor(string name)
+    {
+        Name = name;
+    }
 }
 
 public class SimulatedDriverState : SyncDriverState<DemoSimulatedDriverBase>
