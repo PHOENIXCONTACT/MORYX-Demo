@@ -1,5 +1,58 @@
 {
-  "ModuleSortIndices": [],
-  "ExternalModules": [],
+  "ModuleSortIndices": [
+    {
+      "Route": "Orders",
+      "SortIndex": 1
+    },
+    {
+      "Route": "FactoryMonitor",
+      "SortIndex": 2
+    },
+    {
+      "Route": "VisualInstructions",
+      "SortIndex": 3
+    },
+    {
+      "Route": "Products",
+      "SortIndex": 4
+    },
+    {
+      "Route": "Resources",
+      "SortIndex": 5
+    },
+    {
+      "Route": "Workplans",
+      "SortIndex": 6
+    },
+    {
+      "Route": "Media",
+      "SortIndex": 7
+    },
+    {
+      "Route": "Notifications",
+      "SortIndex": 8
+    },
+    {
+      "Route": "Operators",
+      "SortIndex": 9
+    },
+    {
+      "Route": "ShiftManagement",
+      "SortIndex": 10
+    },
+    {
+      "Route": "example",
+      "SortIndex": 100
+    }
+  ],
+  "ExternalModules": [
+    {
+      "Title": "Example",
+      "Url": "https://www.wikipedia.org/",
+      "Icon": "globe",
+      "Description": "Example description of the external module.",
+      "Route": "example"
+    }
+  ],
   "ConfigState": "Valid"
 }
