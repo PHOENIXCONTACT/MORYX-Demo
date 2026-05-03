@@ -1,6 +1,7 @@
 namespace StartProject.Asp;
 
 using System.IO;
+using System.Linq;
 using System.Threading;
 using Microsoft.AspNetCore.Hosting;
 
@@ -18,7 +19,7 @@ public class StartUpHook
             {
                 Directory.CreateDirectory(dbPath);
             }
-            var dbFiles = Directory.GetFiles(dbPath);
+            var dbFiles = Directory.GetFiles(dbPath).Where(fn => !fn.Contains(".gitkeep")).ToArray();
             var dbFolders = Directory.GetDirectories(dbPath);
             if (dbFiles.Length == 0 && dbFolders.Length == 0)
             {
@@ -29,9 +30,6 @@ public class StartUpHook
                     var targetFile = Path.Combine(dbPath, fileName);
                     File.Copy(file, targetFile);
                 }
-            }
-            if (dbFolders.Length == 0 && dbFiles.Length == 0)
-            {
                 var backFolders = Directory.GetDirectories(backDbPath);
                 foreach (var folder in backFolders)
                 {
