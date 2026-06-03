@@ -92,7 +92,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(\"id\") FROM \"controlSystem_processes\" WHERE $timeFilter AND \"success\" = true",
+          "query": "SELECT count(\"success\") FROM \"processEngine_processes\" WHERE $timeFilter AND \"success\" = true",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -157,7 +157,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^result$/",
+          "fields": "",
           "values": false
         },
         "showThresholdLabels": true,
@@ -186,24 +186,24 @@
             }
           ],
           "hide": false,
-          "measurement": "controlSystem_processes",
+          "measurement": "processEngine_processes",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(\"id\") as successCount FROM controlSystem_processes WHERE $timeFilter AND success = true",
+          "query": "SELECT count(\"success\") as successCount FROM processEngine_processes WHERE $timeFilter AND success = true",
           "rawQuery": true,
           "refId": "success",
-          "resultFormat": "time_series",
+          "resultFormat": "table",
           "select": [
             [
               {
                 "params": [
-                  "id"
+                  "value"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "count"
+                "type": "mean"
               }
             ]
           ],
@@ -229,13 +229,13 @@
             }
           ],
           "hide": false,
-          "measurement": "controlSystem_processes",
+          "measurement": "processEngine_processes",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(\"id\") as total FROM controlSystem_processes WHERE $timeFilter",
+          "query": "SELECT count(\"cycleTime\") as total FROM processEngine_processes WHERE $timeFilter",
           "rawQuery": true,
           "refId": "total",
-          "resultFormat": "time_series",
+          "resultFormat": "table",
           "select": [
             [
               {
@@ -274,10 +274,10 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "select sum(runtime) from (SELECT mean(\"runtimeMs\") as runtime FROM \"controlSystem_activities\" WHERE $timeFilter AND \"order\" != '' GROUP BY \"type\")",
+          "query": "select sum(runtime) from (SELECT mean(\"runtimeMs\") as runtime FROM \"processEngine_activities\" WHERE $timeFilter AND \"order\" != '' GROUP BY \"type\")",
           "rawQuery": true,
           "refId": "runtime",
-          "resultFormat": "time_series",
+          "resultFormat": "table",
           "select": [
             [
               {
@@ -299,24 +299,57 @@
             "type": "influxdb",
             "uid": "0PiYVt24k"
           },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "hide": false,
-          "query": "Select sum(waittime) from (SELECT mean(\"waittimeMS\") as waittime FROM \"controlSystem_activities\" WHERE $timeFilter AND \"order\" != '' GROUP BY \"type\")",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "Select sum(waittime) from (SELECT mean(\"waitTimeMS\") as waittime FROM \"processEngine_activities\" WHERE $timeFilter AND \"order\" != '' GROUP BY \"type\")",
           "rawQuery": true,
           "refId": "waittime",
-          "resultFormat": "time_series"
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         },
         {
           "datasource": {
+            "name": "Expression",
             "type": "__expr__",
             "uid": "__expr__"
           },
-          "expression": "($success/$total) ",
+          "expression": "($success/$total) * 100",
           "hide": false,
           "refId": "percentage",
           "type": "math"
         },
         {
           "datasource": {
+            "name": "Expression",
             "type": "__expr__",
             "uid": "__expr__"
           },
@@ -327,6 +360,7 @@
         },
         {
           "datasource": {
+            "name": "Expression",
             "type": "__expr__",
             "uid": "__expr__"
           },
@@ -338,6 +372,7 @@
         },
         {
           "datasource": {
+            "name": "Expression",
             "type": "__expr__",
             "uid": "__expr__"
           },
@@ -349,6 +384,7 @@
         },
         {
           "datasource": {
+            "name": "Expression",
             "type": "__expr__",
             "uid": "__expr__"
           },
@@ -359,6 +395,16 @@
         }
       ],
       "title": "OEE",
+            "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "last"
+            ]
+          }
+        }
+      ],
       "type": "gauge"
     },
     {
@@ -403,7 +449,7 @@
           "calcs": [
             "mean"
           ],
-          "fields": "/^controlSystem_processes\\.mean$/",
+          "fields": "/^processEngine_processes\\.mean$/",
           "values": false
         },
         "text": {},
@@ -431,10 +477,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "controlSystem_processes",
+          "measurement": "processEngine_processes",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"cycleTime\")  FROM controlSystem_processes WHERE $timeFilter GROUP BY time(5m) fill(0)",
+          "query": "SELECT mean(\"cycleTime\")  FROM processEngine_processes WHERE $timeFilter GROUP BY time(5m) fill(0)",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -500,7 +546,7 @@
           "calcs": [
             "count"
           ],
-          "fields": "/^controlSystem_processes\\.count$/",
+          "fields": "/^processEngine_processes\\.success_count$/",
           "values": false
         },
         "text": {},
@@ -527,10 +573,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "controlSystem_processes",
+          "measurement": "processEngine_processes",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(\"id\") FROM \"controlSystem_processes\" WHERE $timeFilter GROUP BY time(1m) fill(null)",
+          "query": "SELECT count(\"success\") AS success_count, count(\"id\") AS id_count FROM \"processEngine_processes\" WHERE $timeFilter GROUP BY time(1m) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -575,7 +621,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.runtime {type: AssemblyActivity}"
+              "options": "processEngine_activities.runtime {type: AssemblyActivity}"
             },
             "properties": [
               {
@@ -587,7 +633,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.waittime {type: AssemblyActivity}"
+              "options": "processEngine_activities.waittime {type: AssemblyActivity}"
             },
             "properties": [
               {
@@ -599,7 +645,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.runtime {type: SolderingActivity}"
+              "options": "processEngine_activities.runtime {type: SolderingActivity}"
             },
             "properties": [
               {
@@ -611,7 +657,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.waittime {type: SolderingActivity}"
+              "options": "processEngine_activities.waittime {type: SolderingActivity}"
             },
             "properties": [
               {
@@ -623,7 +669,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.runtime {type: TestActivity}"
+              "options": "processEngine_activities.runtime {type: TestActivity}"
             },
             "properties": [
               {
@@ -635,7 +681,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.waittime {type: TestActivity}"
+              "options": "processEngine_activities.waittime {type: TestActivity}"
             },
             "properties": [
               {
@@ -647,7 +693,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.runtime {type: PackingActivity}"
+              "options": "processEngine_activities.runtime {type: PackingActivity}"
             },
             "properties": [
               {
@@ -659,7 +705,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.waittime {type: PackingActivity}"
+              "options": "processEngine_activities.waittime {type: PackingActivity}"
             },
             "properties": [
               {
@@ -720,10 +766,10 @@
               "type": "tag"
             }
           ],
-          "measurement": "controlSystem_activities",
+          "measurement": "processEngine_activities",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"runtimeMs\") as runtime, mean(\"waittimeMS\") as waittime FROM \"controlSystem_activities\" WHERE $timeFilter AND \"order\" != '' GROUP BY \"type\"",
+          "query": "SELECT mean(\"runtimeMs\") as runtime, mean(\"waittimeMS\") as waittime FROM \"processEngine_activities\" WHERE $timeFilter AND \"order\" != '' GROUP BY \"type\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -855,10 +901,10 @@
             }
           ],
           "limit": "1",
-          "measurement": "controlSystem_activities",
+          "measurement": "processEngine_activities",
           "orderByTime": "DESC",
           "policy": "default",
-          "query": "SELECT mean(\"processes\") FROM (SELECT count(\"process\") as \"processes\" FROM \"controlSystem_activities\" WHERE $timeFilter GROUP BY time(1m), \"resource\") GROUP BY \"resource\"",
+          "query": "SELECT mean(\"processes\") FROM (SELECT count(\"process\") as \"processes\" FROM \"processEngine_activities\" WHERE $timeFilter GROUP BY time(1m), \"resource\") GROUP BY \"resource\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -922,7 +968,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^percentage$/",
+          "fields": "",
           "values": false
         },
         "showThresholdLabels": true,
@@ -953,10 +999,10 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(\"id\") as successCount FROM controlSystem_processes WHERE $timeFilter AND success = true",
+          "query": "SELECT count(\"success\") as successCount FROM processEngine_processes WHERE $timeFilter AND success = true",
           "rawQuery": true,
           "refId": "success",
-          "resultFormat": "time_series",
+          "resultFormat": "table",
           "select": [
             [
               {
@@ -995,10 +1041,10 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(\"id\") as total FROM controlSystem_processes WHERE $timeFilter AND \"order\" != ''",
+          "query": "SELECT count(\"cycleTime\") as total FROM processEngine_processes WHERE $timeFilter AND \"order\" != ''",
           "rawQuery": true,
           "refId": "total",
-          "resultFormat": "time_series",
+          "resultFormat": "table",
           "select": [
             [
               {
@@ -1016,7 +1062,8 @@
           "tags": []
         },
         {
-          "datasource": {
+         "datasource": {
+            "name": "Expression",
             "type": "__expr__",
             "uid": "__expr__"
           },
@@ -1027,6 +1074,16 @@
         }
       ],
       "title": "Success Rate",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "last"
+            ]
+          }
+        }
+      ],
       "type": "gauge"
     },
     {
@@ -1093,7 +1150,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(\"id\") FROM controlSystem_processes WHERE $timeFilter AND \"success\" = false AND \"order\" != ''\n\n",
+          "query": "SELECT count(\"success\") FROM processEngine_processes WHERE $timeFilter AND \"success\" = false AND \"order\" != ''\n\n",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -1213,10 +1270,10 @@
               "type": "tag"
             }
           ],
-          "measurement": "controlSystem_activities",
+          "measurement": "processEngine_activities",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT count(\"id\") FROM \"controlSystem_activities\" WHERE $timeFilter AND \"success\" = false GROUP BY \"resource\"",
+          "query": "SELECT count(\"id\") FROM \"processEngine_activities\" WHERE $timeFilter AND \"success\" = false GROUP BY \"resource\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -1333,10 +1390,10 @@
               "type": "tag"
             }
           ],
-          "measurement": "controlSystem_activities",
+          "measurement": "processEngine_activities",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"solderingTemp\" FROM \"controlSystem_activities\" WHERE $timeFilter GROUP BY \"resource\"",
+          "query": "SELECT \"solderingTemp\" FROM \"processEngine_activities\" WHERE $timeFilter GROUP BY \"resource\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -1592,7 +1649,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.carbon {type: AssemblyActivity}"
+              "options": "processEngine_activities.carbon {type: AssemblyActivity}"
             },
             "properties": [
               {
@@ -1604,7 +1661,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.carbon {type: SolderingActivity}"
+              "options": "processEngine_activities.carbon {type: SolderingActivity}"
             },
             "properties": [
               {
@@ -1616,7 +1673,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.carbon {type: TestActivity}"
+              "options": "processEngine_activities.carbon {type: TestActivity}"
             },
             "properties": [
               {
@@ -1628,7 +1685,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "controlSystem_activities.carbon {type: PackingActivity}"
+              "options": "processEngine_activities.carbon {type: PackingActivity}"
             },
             "properties": [
               {
@@ -1689,10 +1746,10 @@
               "type": "tag"
             }
           ],
-          "measurement": "controlSystem_activities",
+          "measurement": "processEngine_activities",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (mean(\"energy\") * 366) as \"carbon\" FROM (SELECT (\"energy\" / 1000 * \"runtimeMs\" / 3600000) as \"energy\" FROM \"controlSystem_activities\" WHERE $timeFilter AND \"order\" != '' GROUP BY \"type\") GROUP BY \"type\"",
+          "query": "SELECT (mean(\"energy\") * 366) as \"carbon\" FROM (SELECT (\"energy\" / 1000 * \"runtimeMs\" / 3600000) as \"energy\" FROM \"processEngine_activities\" WHERE $timeFilter AND \"order\" != '' GROUP BY \"type\") GROUP BY \"type\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1788,7 +1845,7 @@
             "type": "influxdb",
             "uid": "0PiYVt24k"
           },
-          "query": "SELECT sum(\"cellpower\") as Total from (SELECT mean(\"current_power\") as cellpower FROM \"cell_report\" WHERE $timeFilter GROUP BY source)",
+          "query": "SELECT sum(\"current_power\") as Total FROM \"cell_report\" WHERE $timeFilter ",
           "rawQuery": true,
           "refId": "total",
           "resultFormat": "time_series"
@@ -1799,18 +1856,41 @@
             "uid": "0PiYVt24k"
           },
           "hide": false,
-          "query": "SELECT sum(\"energy\") as Productive FROM (SELECT (energy*runtimeMs/1000)/ 3600 as energy FROM controlSystem_activities WHERE $timeFilter AND \"order\" != '')",
+          "query": "SELECT sum(\"energy\") as Productive FROM (SELECT (energy*runtimeMs)/ 3600000 as energy FROM \"processEngine_activities\" WHERE $timeFilter AND \"order\" != '') ",
           "rawQuery": true,
           "refId": "used",
           "resultFormat": "time_series"
         },
+
+        {
+          "refId": "totalValue",
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "type": "reduce",
+          "expression": "total",
+          "reducer": "last"
+
+        },
+        {
+          "refId": "usedValue",
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "type": "reduce",
+          "expression": "used",
+          "reducer": "last"
+        },
+
         {
           "datasource": {
             "name": "Expression",
             "type": "__expr__",
             "uid": "__expr__"
           },
-          "expression": "$used / $total * 100",
+          "expression": "$usedValue / $totalValue * 100",
           "hide": false,
           "refId": "utilization",
           "type": "math"
