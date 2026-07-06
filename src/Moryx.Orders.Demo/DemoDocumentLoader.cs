@@ -1,14 +1,15 @@
 // Copyright (c) 2025, Phoenix Contact GmbH & Co. KG
 // Licensed under the Apache License, Version 2.0
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
+using MimeTypes;
 using Moryx.Container;
 using Moryx.Orders.Assignment;
 using Moryx.Orders.Documents;
-using MimeTypes;
-using System.Threading;
 
 namespace Moryx.Orders.Demo;
 
@@ -36,7 +37,10 @@ public class DemoDocumentLoader : IDocumentLoader
 
     public Task<IReadOnlyList<Document>> LoadAsync(Operation operation, CancellationToken cancellationToken)
     {
-        var path = ".\\Backups\\Orders";
+        var path = OperatingSystem.IsLinux()
+            ? Path.Combine(Path.GetTempPath(), "MoryxDemo", "Backups", "Orders")
+            : Path.Combine(AppContext.BaseDirectory, "Backups", "Orders");
+
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
