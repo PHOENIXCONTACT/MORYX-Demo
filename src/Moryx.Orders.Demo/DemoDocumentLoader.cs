@@ -4,14 +4,23 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using MimeTypes;
 using Moryx.Container;
+using Moryx.Modules;
 using Moryx.Orders.Assignment;
 using Moryx.Orders.Documents;
 
 namespace Moryx.Orders.Demo;
+
+[DataContract]
+public class DemoDocumentLoaderConfig : DocumentLoaderConfig
+{
+    [DataMember]
+    public string BasePath { get; set; }
+}
 
 public class LocalDocument : Document
 {
@@ -25,22 +34,27 @@ public class LocalDocument : Document
 }
 
 [Plugin(LifeCycle.Singleton, typeof(IDocumentLoader), Name = nameof(DemoDocumentLoader))]
+[ExpectedConfig(typeof(DemoDocumentLoaderConfig))]
 public class DemoDocumentLoader : IDocumentLoader
 {
-    private DocumentLoaderConfig _config;
+    private DemoDocumentLoaderConfig _config;
 
     public Task InitializeAsync(DocumentLoaderConfig config, CancellationToken cancellationToken = default)
     {
-        _config = config;
+        _config = config as DemoDocumentLoaderConfig;
         return Task.CompletedTask;
     }
 
     public Task<IReadOnlyList<Document>> LoadAsync(Operation operation, CancellationToken cancellationToken)
     {
-        var path = OperatingSystem.IsLinux()
-            ? Path.Combine(Path.GetTempPath(), "MoryxDemo", "Backups", "Orders")
-            : Path.Combine(AppContext.BaseDirectory, "Backups", "Orders");
+        var path = _config?.BasePath;
 
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            path = OperatingSystem.IsLinux()
+                ? Path.Combine(Path.GetTempPath(), "MoryxDemo", "Backups", "Orders")
+                : Path.Combine(AppContext.BaseDirectory, "Backups", "Orders");
+        }
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
