@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Threading;
@@ -19,7 +20,8 @@ namespace Moryx.Orders.Demo;
 public class DemoDocumentLoaderConfig : DocumentLoaderConfig
 {
     [DataMember]
-    public string BasePath { get; set; }
+    [DefaultValue("./Backups/Orders")]
+    public string BasePath { get; set; } = "./Backups/Orders";
 }
 
 public class LocalDocument : Document
@@ -47,14 +49,14 @@ public class DemoDocumentLoader : IDocumentLoader
 
     public Task<IReadOnlyList<Document>> LoadAsync(Operation operation, CancellationToken cancellationToken)
     {
-        var path = _config?.BasePath;
-
-        if (string.IsNullOrWhiteSpace(path))
+        var rawPath = _config?.BasePath;
+        if (string.IsNullOrWhiteSpace(rawPath))
         {
-            path = OperatingSystem.IsLinux()
-                ? Path.Combine(Path.GetTempPath(), "MoryxDemo", "Backups", "Orders")
-                : Path.Combine(AppContext.BaseDirectory, "Backups", "Orders");
+            rawPath = "./Backups/Orders";
         }
+
+        var path = Path.GetFullPath(rawPath);
+
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
