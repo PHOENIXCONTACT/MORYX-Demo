@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
@@ -13,7 +12,6 @@ using Moryx.AbstractionLayer.Capabilities;
 using Moryx.AbstractionLayer.Resources;
 using Moryx.ControlSystem.Activities;
 using Moryx.ControlSystem.Cells;
-using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Demo.Activities;
 using Moryx.Demo.Capabilities;
 using Moryx.Demo.Properties;

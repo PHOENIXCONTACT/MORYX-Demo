@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Moryx.ControlSystem.Setups;
 using Moryx.Demo.Products;
-using Moryx.Serialization;
 
 namespace Moryx.ControlSystem.Demo.SetupTriggers;
 

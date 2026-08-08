@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Processes;
 using Moryx.AbstractionLayer.Recipes;
-using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Demo.Products;
 using Moryx.Serialization;
 using Moryx.VisualInstructions;

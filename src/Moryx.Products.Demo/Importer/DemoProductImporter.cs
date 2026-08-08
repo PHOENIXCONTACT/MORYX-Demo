@@ -8,7 +8,6 @@ using Moryx.AbstractionLayer.Products;
 using Moryx.AbstractionLayer.Recipes;
 using Moryx.AbstractionLayer.Workplans;
 using Moryx.Container;
-using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Demo.Activities;
 using Moryx.Demo.Products;
 using Moryx.Demo.Recipes;

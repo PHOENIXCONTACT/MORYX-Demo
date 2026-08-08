@@ -4,7 +4,6 @@
 using System.Runtime.Serialization;
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Processes;
-using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Serialization;
 using Moryx.VisualInstructions;
 

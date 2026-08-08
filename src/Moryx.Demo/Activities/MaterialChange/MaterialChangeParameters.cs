@@ -4,7 +4,6 @@
 using Moryx.AbstractionLayer.Activities;
 using Moryx.AbstractionLayer.Processes;
 using Moryx.AbstractionLayer.Products;
-using Moryx.ControlSystem.VisualInstructions;
 using Moryx.VisualInstructions;
 
 namespace Moryx.Demo.Activities;

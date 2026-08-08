@@ -4,7 +4,6 @@
 using Moryx.AbstractionLayer.Recipes;
 using Moryx.Container;
 using Moryx.ControlSystem.Setups;
-using Moryx.ControlSystem.VisualInstructions;
 using Moryx.Demo.Activities;
 using Moryx.Demo.Capabilities;
 using Moryx.Demo.Products;
