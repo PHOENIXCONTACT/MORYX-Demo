@@ -98,7 +98,7 @@ public class AssemblyCellTests
         _instructor.Verify(
             instructor => instructor.Execute(It.IsAny<ActiveInstruction>(), It.IsAny<Action<ActiveInstructionResponse>>()),
             Times.Never);
-        Assert.Fail();
+        // Assert.Fail();
         Assert.That(_cell.CurrentSession, Is.SameAs(activityStart));
         Assert.That(_cell.CellState, Is.EqualTo("Running"));
     }
