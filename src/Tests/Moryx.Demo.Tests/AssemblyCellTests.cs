@@ -79,6 +79,31 @@ public class AssemblyCellTests
     }
 
     [Test]
+    public void StartActivity_WithAssemblyActivity_CallsDriver()
+    {
+        var activity = new AssemblyActivity
+        {
+            Id = 123,
+            Parameters = new AssemblyParameters()
+        };
+        var activityStart = CreateActivityStart(activity, ActivityClassification.Production);
+
+        _cell.ManualMode = false;
+
+        _cell.StartActivity(activityStart);
+
+        _driver.Verify(
+            driver => driver.Send(It.Is<AssembleProductMessage>(message => message.ActivityId == activity.Id)),
+            Times.Once);
+        _instructor.Verify(
+            instructor => instructor.Execute(It.IsAny<ActiveInstruction>(), It.IsAny<Action<ActiveInstructionResponse>>()),
+            Times.Never);
+        // Assert.Fail();
+        Assert.That(_cell.CurrentSession, Is.SameAs(activityStart));
+        Assert.That(_cell.CellState, Is.EqualTo("Running"));
+    }
+
+    [Test]
     public void StartActivity_WithManualAssemblyActivity_ExecutesVisualInstructionAndDoesNotSendDriverMessage()
     {
         var activityStart = CreateActivityStart(new AssemblyActivity
